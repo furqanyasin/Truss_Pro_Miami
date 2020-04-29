@@ -1,0 +1,2 @@
+rootProject.name='Truss Pro Miami'
+include ':app'
