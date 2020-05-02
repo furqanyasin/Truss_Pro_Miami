@@ -1,20 +1,23 @@
 package com.example.trusspromiami;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.Activity;
 import android.content.DialogInterface;
+
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.trusspromiami.adapters.SliderAdapter;
 import com.example.trusspromiami.models.SliderModel;
@@ -36,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     final private long PERIOD_TIME = 2000;
     private int currentPage = 2;
     List<SliderModel> sliderModelList;
-
+    boolean ishome = true;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,22 +49,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         // set custom toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // slider images
+        // navigation drawer navigation
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigation_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.getMenu().getItem(0).setChecked(true);
+        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
+        navigationView.setNavigationItemSelectedListener(this);
 
+
+        // slider images
         bannerSliderViewPager = findViewById(R.id.banner_slider_view_Pager);
         indicator = findViewById(R.id.indicator);
-
         sliderModelList = new ArrayList<SliderModel>();
-
         sliderModelList.add(new SliderModel(R.drawable.one));
         sliderModelList.add(new SliderModel(R.drawable.two));
         sliderModelList.add(new SliderModel(R.drawable.three));
         sliderModelList.add(new SliderModel(R.drawable.four));
-
-
 
         SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
         bannerSliderViewPager.setAdapter(sliderAdapter);
@@ -98,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
+        // slider images
 
     }
 
@@ -105,30 +117,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
         ExitAlert();
-
     }
 
     private void ExitAlert() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("Alert");
-        dialog.setIcon(R.drawable.ic_warning_black_24dp);
-        dialog.setCancelable(false);
-        dialog.setMessage("Are you sure! you want to exit?");
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            if (ishome == false) {
+                navigationView.getMenu().getItem(0).setChecked(true);
+                onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
+            } else {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                moveTaskToBack(true);
+                                break;
 
-        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+                builder.setMessage("Do you want exit?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
             }
-        });
+        }
 
-        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+    }
 
-            }
-        });
-        dialog.show();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        MenuItem OBP =menu.add("Order By Price");
+        MenuItem  OBN =menu.add("Order By Name");
+        MenuItem  OBC =menu.add("Order By Catagory");
+
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Toast.makeText(MainActivity.this,"Settings !",Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -138,24 +181,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_home) {
             // Handle the camera action
+        } else if (id == R.id.nav_home) {
+
         } else if (id == R.id.nav_profile) {
 
-        } else if (id == R.id.nav_cart) {
+        } else if (id == R.id.nav_orders) {
 
-        } else if (id == R.id.nav_category) {
+        } else if (id == R.id.nav_logout) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_feedback) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_aboutus) {
 
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
 
+    ///slider banner functions
     private void pageLope() {
         if (currentPage == sliderModelList.size()) {
             bannerSliderViewPager.setCurrentItem(currentPage++, false);
@@ -189,4 +235,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void stopBannerSlideShow() {
         timer.cancel();
     }
+    ///slider banner functions
 }

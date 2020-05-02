@@ -7,31 +7,35 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Camera" />
-        <item
-            android:id="@+id/nav_category"
-            android:icon="@drawable/ic_category_black_24dp"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_cart"
-            android:icon="@drawable/ic_add_shopping_cart_black_24dp"
-            android:title="SlideShow" />
+            android:title="@string/home" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_person_outline_black_24dp"
-            android:title="Tools" />
-    </group>
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/profile" />
+        <item
+            android:id="@+id/nav_orders"
+            android:icon="@drawable/ic_order_black_24dp"
+            android:title="@string/my_orders" />
 
-    <item android:title="Communicate">
+    </group>
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        android:title="@string/logout" />
+    <item android:title="Feedback">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_feedback"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="@string/feedback" />
+        </menu>
+    </item>
+    <item android:title="About us">
+        <menu>
+            <item
+                android:id="@+id/nav_aboutus"
+                android:icon="@drawable/ic_about_black_24dp"
+                android:title="@string/about_us" />
         </menu>
     </item>
 
