@@ -16,4 +16,30 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="BtnInlineRight">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@drawable/blue_rectangle</item>
+        <item name="android:drawablePadding">@dimen/fab_margin_half</item>
+        <item name="android:drawableRight">@drawable/ic_arrow_right_white</item>
+        <item name="android:paddingLeft">@dimen/fab_margin_24</item>
+        <item name="android:paddingRight">@dimen/fab_margin_24</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="SmallRating" parent="Base.Widget.AppCompat.RatingBar.Small">
+    <item name="colorPrimary">@color/colorPrimaryDark</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
+
+
+
+
 </resources>

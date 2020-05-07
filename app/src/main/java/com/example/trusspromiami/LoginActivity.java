@@ -1,6 +1,7 @@
 package com.example.trusspromiami;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,35 +14,28 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.trusspromiami.R;
+import com.example.trusspromiami.databinding.ActivityLoginBinding;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button btnLogin;
-    private TextView signup;
-    private TextInputEditText textInputEditTextEmail, textInputEditTextPassword;
+    private ActivityLoginBinding activityLoginBinding;
+
     private SharedValues prefrences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        activityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login);
 
 
+        activityLoginBinding.tvSignUp.setOnClickListener(this);
+        activityLoginBinding.btnLogin.setOnClickListener(this);
 
-        textInputEditTextEmail = findViewById(R.id.tiet_login_email);
-        textInputEditTextPassword = findViewById(R.id.tiet_login_password);
-
-        signup = findViewById(R.id.signup);
-        signup.setOnClickListener(this);
-
-        btnLogin = findViewById(R.id.btn_login);
-        btnLogin.setOnClickListener(this);
-
-        textInputEditTextEmail.setText("admin@gmail.com");
-        textInputEditTextPassword.setText("123456");
+        activityLoginBinding.etLoginEmail.setText("admin@gmail.com");
+        activityLoginBinding.etLoginPassword.setText("123456");
 
         prefrences = new SharedValues(this);
         if(prefrences.getBooleanValue("session")){
@@ -55,11 +49,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        if (v == btnLogin)
+        if (v == activityLoginBinding.btnLogin)
         {
 
-            String email = textInputEditTextEmail.getText().toString();
-            String password = textInputEditTextPassword.getText().toString();
+            String email = activityLoginBinding.etLoginEmail.getText().toString();
+            String password = activityLoginBinding.etLoginPassword.getText().toString();
 
             Log.d("Clicked", "--------------- email : " + email);
             Log.e("Clicked", "--------------- Password : " + password);
@@ -71,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(LoginActivity.this, "your username and password is incorrect!", Toast.LENGTH_LONG).show();
             }
 
-        }else   if (v == signup)
+        }else   if (v == activityLoginBinding.tvSignUp)
         {
             Intent intent = new Intent(this, SignupActivity.class);
             startActivity(intent);

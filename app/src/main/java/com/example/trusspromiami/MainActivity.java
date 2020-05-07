@@ -6,21 +6,28 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.DialogInterface;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.trusspromiami.adapters.SliderAdapter;
+import com.example.trusspromiami.databinding.ActivityMainBinding;
 import com.example.trusspromiami.models.SliderModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -31,86 +38,78 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
-    private ViewPager bannerSliderViewPager;
-    TabLayout indicator;
-    private Timer timer;
-    final private long DELAY_TIME = 2000;
-    final private long PERIOD_TIME = 2000;
-    private int currentPage = 2;
-    List<SliderModel> sliderModelList;
+    private ActivityMainBinding activityMainBinding;
     boolean ishome = true;
-    private NavigationView navigationView;
     private Toolbar toolbar;
+
+    private int selectedFragment = 1;
+    List<Fragment> fragments = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        // set custom toolbar
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        fragments.add(HomeFragment.newInstance());
+        fragments.add(CategoryFragment.newInstance());
+        fragments.add(CartFragment.newInstance());
+
 
         // navigation drawer navigation
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, activityMainBinding.drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        activityMainBinding.drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.getMenu().getItem(0).setChecked(true);
-        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
-        navigationView.setNavigationItemSelectedListener(this);
+       /// activityMainBinding.navigationView.getMenu().getItem(0).setChecked(true);
+       // activityMainBinding.navigationView.getMenu().findItem(R.id.nav_home);
+       // activityMainBinding.navigationView.setNavigationItemSelectedListener(this);
 
-
-        // slider images
-        bannerSliderViewPager = findViewById(R.id.banner_slider_view_Pager);
-        indicator = findViewById(R.id.indicator);
-        sliderModelList = new ArrayList<SliderModel>();
-        sliderModelList.add(new SliderModel(R.drawable.one));
-        sliderModelList.add(new SliderModel(R.drawable.two));
-        sliderModelList.add(new SliderModel(R.drawable.three));
-        sliderModelList.add(new SliderModel(R.drawable.four));
-
-        SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
-        bannerSliderViewPager.setAdapter(sliderAdapter);
-        bannerSliderViewPager.setClipToPadding(false);
-        bannerSliderViewPager.setPageMargin(20);
-        indicator.setupWithViewPager(bannerSliderViewPager, true);
-        ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+        activityMainBinding.bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment;
+                switch (item.getItemId()) {
 
-            @Override
-            public void onPageSelected(int position) {
-                currentPage = position;
-            }
+                    case R.id.menu_home:
+                        if (selectedFragment == 0)
+                            return false;
+                        fragment = HomeFragment.newInstance();
+                        replaceFragment(fragment, 0);
+                        return true;
+                    case R.id.menu_categoty:
+                        if (selectedFragment == 1)
+                            return false;
+                        fragment = CategoryFragment.newInstance();
+                        replaceFragment(fragment, 1);
+                        return true;
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                if (state == ViewPager.SCROLL_STATE_IDLE) {
-                    pageLope();
+                    case R.id.menu_cart:
+                        if (selectedFragment == 2)
+                            return false;
+                        fragment = CartFragment.newInstance();
+                        replaceFragment(fragment, 2);
+                        return true;
+
+                    case R.id.menu_profile:
+                        if (selectedFragment == 3)
+                            return false;
+                        fragment = CartFragment.newInstance();
+                        replaceFragment(fragment, 3);
+                        return true;
                 }
 
-            }
-        };
-        bannerSliderViewPager.addOnPageChangeListener(onPageChangeListener);
-        startBannerSlideShow();
-
-        bannerSliderViewPager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                pageLope();
-                stopBannerSlideShow();
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    stopBannerSlideShow();
-                }
                 return false;
             }
         });
-        // slider images
 
+
+    }
+
+    void replaceFragment(Fragment fragment, int index) {
+
+        selectedFragment = index;
+        activityMainBinding.tvNetwork.setVisibility(View.GONE);
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, fragment, "fragment_" + index).commit();
     }
 
 
@@ -120,13 +119,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void ExitAlert() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (activityMainBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            activityMainBinding.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             if (ishome == false) {
-                navigationView.getMenu().getItem(0).setChecked(true);
-                onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
+                //activityMainBinding.navigationView.getMenu().getItem(0).setChecked(true);
+                //activityMainBinding.navigationView.getMenu().findItem(R.id.nav_home);
+
             } else {
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
@@ -151,27 +150,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        MenuItem OBP =menu.add("Order By Price");
-        MenuItem  OBN =menu.add("Order By Name");
-        MenuItem  OBC =menu.add("Order By Catagory");
-
+        getMenuInflater().inflate(R.menu.search_menu, menu);
         return true;
     }
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Toast.makeText(MainActivity.this,"Settings !",Toast.LENGTH_SHORT).show();
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.action_search) {
+            Intent searchIntent = new Intent(this, SearchActivity.class);
+            startActivity(searchIntent);
+        }
+        return true;
     }
 
     @Override
@@ -180,8 +175,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_profile) {
 
@@ -195,45 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        activityMainBinding.drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-    ///slider banner functions
-    private void pageLope() {
-        if (currentPage == sliderModelList.size()) {
-            bannerSliderViewPager.setCurrentItem(currentPage++, false);
-        }
-
-    }
-
-    private void startBannerSlideShow() {
-        final Handler handler = new Handler();
-        final Runnable update = new Runnable() {
-            @Override
-            public void run() {
-                if (currentPage >= sliderModelList.size()) {
-                    currentPage = 0;
-                }
-                bannerSliderViewPager.setCurrentItem(currentPage++, true);
-
-            }
-        };
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(update);
-            }
-        }, DELAY_TIME, PERIOD_TIME);
-
-
-    }
-
-    private void stopBannerSlideShow() {
-        timer.cancel();
-    }
-    ///slider banner functions
 }

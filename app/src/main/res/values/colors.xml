@@ -2,9 +2,16 @@
 <resources>
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorAccent">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackground">#E4000000</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorLightgray">#07121111</color>
+    <color name="colorScreenBg">#F2F2F2</color>
+    <color name="colorLightgray">#f2f2f2</color>
+    <color name="colorMediumGray">#E1E1E1</color>
+    <color name="colorDarkGray">#6E6E6E</color>
+
+    <color name="drawer_menu_text_color">#99000000</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="bg_product_details">#E8E8E8</color>
 </resources>

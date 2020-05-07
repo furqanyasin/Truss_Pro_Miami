@@ -11,6 +11,8 @@ public class SharedValues {
     public SharedValues(Context context){
         sharedPreferences = context.getSharedPreferences("truss", context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
     }
 
     public void saveLoginData(String email, String password, boolean session) {
