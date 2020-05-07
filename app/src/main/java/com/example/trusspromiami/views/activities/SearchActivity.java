@@ -1,4 +1,4 @@
-package com.example.trusspromiami;
+package com.example.trusspromiami.views.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.example.trusspromiami.R;
 import com.example.trusspromiami.adapters.SearchAdapter;
 
 public class SearchActivity extends AppCompatActivity {

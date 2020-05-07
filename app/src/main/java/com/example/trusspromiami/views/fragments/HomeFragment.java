@@ -1,4 +1,4 @@
-package com.example.trusspromiami;
+package com.example.trusspromiami.views.fragments;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.trusspromiami.R;
 import com.example.trusspromiami.adapters.SliderAdapter;
 import com.example.trusspromiami.models.SliderModel;
 import com.google.android.material.tabs.TabLayout;

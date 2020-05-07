@@ -1,4 +1,4 @@
-package com.example.trusspromiami;
+package com.example.trusspromiami.helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -11,12 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchActivity"></activity>
-        <activity android:name=".WebViewActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".views.activities.SearchActivity"></activity>
+        <activity android:name=".views.activities.WebViewActivity" />
+        <activity android:name=".views.activities.SignupActivity" />
+        <activity android:name=".views.activities.LoginActivity" />
+        <activity android:name=".views.activities.MainActivity" />
+        <activity android:name=".views.activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.example.trusspromiami;
+package com.example.trusspromiami.views.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+
+import com.example.trusspromiami.R;
 
 public class WebViewActivity extends AppCompatActivity {
 
