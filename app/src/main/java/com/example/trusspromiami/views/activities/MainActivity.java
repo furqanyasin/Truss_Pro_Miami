@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.example.trusspromiami.R;
+import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.databinding.ActivityMainBinding;
 import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.views.fragments.AccountFragment;
@@ -19,7 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding activityMainBinding;
     private int selectedFragment = 1;
@@ -36,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void initFragments() {
-
         fragments.add(HomeFragment.newInstance());
         fragments.add(CartFragment.newInstance());
         fragments.add(ContactUsFragment.newInstance());
@@ -50,15 +50,12 @@ public class MainActivity extends AppCompatActivity {
             default:
                 activityMainBinding.bottomBar.setSelectedItemId(R.id.menu_home);
                 break;
-
             case 1:
                 activityMainBinding.bottomBar.setSelectedItemId(R.id.menu_cart);
                 break;
-
             case 2:
                 activityMainBinding.bottomBar.setSelectedItemId(R.id.menu_contact);
                 break;
-
             case 3:
                 activityMainBinding.bottomBar.setSelectedItemId(R.id.menu_account);
                 break;
@@ -66,14 +63,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-
         activityMainBinding.toolbar.ivSvFg.setOnClickListener(mOnClickListener);
         activityMainBinding.bottomBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
     }
 
     void replaceFragment(Fragment fragment, int index) {
-
         selectedFragment = index;
         getSupportFragmentManager().beginTransaction().replace(R.id.host_fragment, fragment, "fragment_" + index).commit();
     }
@@ -87,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     };
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
 
@@ -114,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 fragment = AccountFragment.newInstance();
                 replaceFragment(fragment, 3);
                 break;
-
         }
         return true;
     };

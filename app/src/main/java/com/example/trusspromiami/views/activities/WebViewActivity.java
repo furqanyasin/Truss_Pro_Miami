@@ -9,8 +9,9 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.example.trusspromiami.R;
+import com.example.trusspromiami.baseClasses.BaseActivity;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity extends BaseActivity {
 
     private WebView webView;
 

@@ -11,10 +11,11 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.trusspromiami.R;
+import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.helpers.SharedValues;
 import com.example.trusspromiami.databinding.ActivityLoginBinding;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     private ActivityLoginBinding activityLoginBinding;
 

@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Truss Pro Miami</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="todo">QUE HACER</string>
+    <string name="don_t_have_an_account_sign_up">¿No tienes una cuenta? Regístrate</string>
+    <string name="about_us">Sobre nosotros</string>
+    <string name="feedback">Retroalimentación</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="my_orders">Mis ordenes</string>
+    <string name="settings">Configuraciones</string>
+    <string name="search">Buscar</string>
+
+    <string name="category">Categoría</string>
+    <string name="cart">Carro</string>
+    <string name="account">Cuenta</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">Registrarse</string>
+    <string name="already_have_an_account_sign_in">¿Ya tienes una cuenta? Registrarse</string>
+    <string name="sign_up">Regístrate</string>
+    <string name="search_product">Busca cualquier producto</string>
+    <string name="home">Casa</string>
+    <string name="categoty">Categoría</string>
+    <string name="contact">Contacto</string>
+    <string name="view">View</string>
+    <string name="contact_us">Contacta con nosotros</string>
+    <string name="profile">Perfil</string>
+    <string name="language">Idioma</string>
+    <string name="portuguese">Portugués</string>
+    <string name="spanish">Español</string>
+    <string name="done">Hecho</string>
+    <string name="select_language">Seleccione el idioma</string>
+    <string name="note">Nota</string>
+    <string name="app_lang_message">Notamos que cambia el idioma de la aplicación, necesitamos reiniciar la aplicación para reflejar completamente el idioma recientemente seleccionado.</string>
+    <string name="cancel">Cancelar</string>
+    <string name="agree">De acuerdo</string>
+
+</resources>

@@ -8,9 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.trusspromiami.R;
+import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.databinding.ActivitySignupBinding;
 
-public class SignupActivity extends AppCompatActivity implements View.OnClickListener{
+public class SignupActivity extends BaseActivity implements View.OnClickListener{
 
 
     private ActivitySignupBinding activitySignupBinding;

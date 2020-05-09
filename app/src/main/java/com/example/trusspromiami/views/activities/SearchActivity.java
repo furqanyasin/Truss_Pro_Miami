@@ -13,8 +13,9 @@ import android.widget.Toolbar;
 
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.adapters.SearchAdapter;
+import com.example.trusspromiami.baseClasses.BaseActivity;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Truss Pro Miami</string>
+    <string name="email">O email</string>
+    <string name="password">Senha</string>
+    <string name="login">Conecte-se</string>
+    <string name="todo">TODO</string>
+    <string name="don_t_have_an_account_sign_up">Não possui uma conta? inscrever-se</string>
+    <string name="about_us">Sobre nós</string>
+    <string name="feedback">Comentários</string>
+    <string name="logout">Sair</string>
+    <string name="my_orders">My Orders</string>
+    <string name="settings">Definições</string>
+    <string name="search">Procurar</string>
+
+    <string name="category">Categoria</string>
+    <string name="cart">Carrinho</string>
+    <string name="account">Conta</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">Assinar em</string>
+    <string name="already_have_an_account_sign_in">Já tem uma conta? Assinar em</string>
+    <string name="sign_up">Inscrever-se</string>
+    <string name="search_product">Pesquise qualquer produto</string>
+    <string name="home">Casa</string>
+    <string name="categoty">Categoria</string>
+    <string name="contact">Contato</string>
+    <string name="view">View</string>
+    <string name="contact_us">Contate-Nos</string>
+    <string name="profile">Perfil</string>
+    <string name="language">Língua</string>
+    <string name="portuguese">Português</string>
+    <string name="spanish">Espanhol</string>
+    <string name="done">Feito</string>
+    <string name="select_language">Selecione o idioma</string>
+    <string name="note">Nota</string>
+    <string name="app_lang_message">Observamos que você altera o idioma do aplicativo. Precisamos reiniciar o aplicativo para refletir completamente o novo idioma selecionado.</string>
+    <string name="cancel">Cancelar</string>
+    <string name="agree">Aceita</string>
+
+</resources>
