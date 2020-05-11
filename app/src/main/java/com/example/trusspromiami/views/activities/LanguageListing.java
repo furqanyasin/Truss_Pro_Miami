@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
 
+import com.example.trusspromiami.App;
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.databinding.ActivityLanguageListingBinding;
@@ -22,6 +23,7 @@ public class LanguageListing extends BaseActivity {
     private DialogueListener dialogueListener = new DialogueListener() {
         @Override
         public void positiveButtonClick(Boolean click) {
+            LanguageHelper.setLanguage(App.getContext(), languageCode);
             relaunchApp(LanguageListing.this);
         }
 
@@ -57,7 +59,6 @@ public class LanguageListing extends BaseActivity {
                         dialogueListener);
                 break;
         }
-        LanguageHelper.setLanguage(this, languageCode);
         setView();
     };
 

@@ -40,5 +40,9 @@
     <string name="app_lang_message">Observamos que você altera o idioma do aplicativo. Precisamos reiniciar o aplicativo para refletir completamente o novo idioma selecionado.</string>
     <string name="cancel">Cancelar</string>
     <string name="agree">Aceita</string>
+    <string name="my_photo">My Photo</string>
+    <string name="name">Name</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="address">Address</string>
 
 </resources>

@@ -50,5 +50,10 @@
     <string name="app_lang_message">We notice you change app language, we need to restart app to completely reflect the new selected language.</string>
     <string name="cancel">Cancel</string>
     <string name="agree">Agree</string>
+    <string name="title_activity_account_information">AccountInformationActivity</string>
+    <string name="my_photo">My Photo</string>
+    <string name="name">Name</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="address">Address</string>
 
 </resources>

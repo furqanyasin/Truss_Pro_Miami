@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment;
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.databinding.FragmentAccountBinding;
 import com.example.trusspromiami.databinding.FragmentHomeBinding;
+import com.example.trusspromiami.views.activities.AccountInformationActivity;
 import com.example.trusspromiami.views.activities.LanguageListing;
+import com.example.trusspromiami.views.activities.LoginActivity;
 import com.example.trusspromiami.views.activities.MainActivity;
 import com.example.trusspromiami.views.activities.SearchActivity;
 
@@ -51,6 +53,9 @@ public class AccountFragment extends Fragment {
         fragmentAccountBinding.orders.setOnClickListener(mOnClickListener);
         fragmentAccountBinding.contactUs.setOnClickListener(mOnClickListener);
         fragmentAccountBinding.language.setOnClickListener(mOnClickListener);
+        fragmentAccountBinding.ivContainer.setOnClickListener(mOnClickListener);
+
+        fragmentAccountBinding.tvLoginLogout.setOnClickListener(mOnClickListener);
     }
 
     private View.OnClickListener mOnClickListener = item -> {
@@ -59,6 +64,14 @@ public class AccountFragment extends Fragment {
 
             case R.id.language:
                 startActivity(new Intent(getContext(), LanguageListing.class));
+                break;
+
+            case R.id.tv_login_logout:
+                startActivity(new Intent(getContext(), LoginActivity.class));
+                break;
+
+            case R.id.iv_container:
+                startActivity(new Intent(getContext(), AccountInformationActivity.class));
                 break;
         }
     };

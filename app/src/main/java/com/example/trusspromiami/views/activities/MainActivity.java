@@ -86,6 +86,7 @@ public class MainActivity extends BaseActivity {
             = item -> {
 
         Fragment fragment;
+        activityMainBinding.toolbar.getRoot().setVisibility(View.VISIBLE);
 
         switch (item.getItemId()) {
 
@@ -106,6 +107,7 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case R.id.menu_account:
+                activityMainBinding.toolbar.getRoot().setVisibility(View.GONE);
                 fragment = AccountFragment.newInstance();
                 replaceFragment(fragment, 3);
                 break;
