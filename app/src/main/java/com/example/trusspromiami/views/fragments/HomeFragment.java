@@ -9,12 +9,17 @@ import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.adapters.SliderAdapter;
 import com.example.trusspromiami.databinding.FragmentHomeBinding;
 import com.example.trusspromiami.models.SliderModel;
+import com.example.trusspromiami.models.category.Category;
+import com.example.trusspromiami.views.adapters.CategoryAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -35,7 +40,9 @@ public class HomeFragment extends Fragment {
     final private long DELAY_TIME = 2000;
     final private long PERIOD_TIME = 2000;
     private int currentPage = 2;
-    List<SliderModel> sliderModelList;
+    private List<SliderModel> sliderModelList;
+    private ArrayList<Category> categories = new ArrayList<>();
+    private CategoryAdapter adapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -56,7 +63,25 @@ public class HomeFragment extends Fragment {
                 false);
 
         setSlider();
+        getCategoryList();
+        setAdapter();
         return fragmentHomeBinding.getRoot();
+    }
+
+    private void setAdapter() {
+
+        if (getContext() != null) {
+            adapter = new CategoryAdapter(getContext());
+            fragmentHomeBinding.rvCategory.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            fragmentHomeBinding.rvCategory.setAdapter(adapter);
+            fragmentHomeBinding.rvCategory.setHasFixedSize(true);
+            adapter.setData(categories);
+        }
+    }
+
+
+    private void getCategoryList() {
+        categories = Category.getCategoryList();
     }
 
     private void setSlider() {

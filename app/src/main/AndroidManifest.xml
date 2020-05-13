@@ -13,11 +13,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".views.activities.AccountInformationActivity"
-            android:label="@string/title_activity_account_information"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".views.activities.LanguageListing"
-            android:label="@string/title_activity_language_listing"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".views.activities.SearchActivity" />
         <activity android:name=".views.activities.WebViewActivity" />

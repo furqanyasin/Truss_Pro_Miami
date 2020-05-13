@@ -62,4 +62,5 @@ dependencies {
     api 'com.google.android.material:material:1.1.0-alpha05'
 
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
+
 }
