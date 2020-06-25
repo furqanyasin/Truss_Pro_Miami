@@ -50,4 +50,6 @@
     <string name="english">English</string>
     <string name="shop">Shop</string>
 
+    <string name="banner_circle_tag" translatable="false">3</string>
+
 </resources>

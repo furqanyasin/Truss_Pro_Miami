@@ -10,14 +10,14 @@
 
         <ImageView
             android:id="@+id/iv_category"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/one" />
+            tools:src="@drawable/cate" />
 
         <Button
             android:id="@+id/btn_shop"

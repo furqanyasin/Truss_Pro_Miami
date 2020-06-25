@@ -8,4 +8,5 @@ public class AppConstants {
     public static final String ENGLISH = "en";
     public static final String SPANISH = "es";
     public static final String PORTUGUES = "pt";
+    public static final String TEST_IMAGE = "https://www.lalaland.pk/storage/home_banners/181_1588320396.jpg";
 }
