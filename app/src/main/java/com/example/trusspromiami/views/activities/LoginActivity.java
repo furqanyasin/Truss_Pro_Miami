@@ -5,92 +5,76 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toolbar;
+import android.widget.Toast;
 
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.RetrofitClient;
 import com.example.trusspromiami.baseClasses.BaseActivity;
-import com.example.trusspromiami.helpers.SharedValues;
 import com.example.trusspromiami.databinding.ActivityLoginBinding;
+import com.example.trusspromiami.models.LoginResponce;
+import com.example.trusspromiami.WebApis;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener{
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private ActivityLoginBinding activityLoginBinding;
 
-    private SharedValues prefrences;
+    private WebApis webApis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+        activityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
 
         activityLoginBinding.tvSignUp.setOnClickListener(this);
         activityLoginBinding.btnLogin.setOnClickListener(this);
 
-        activityLoginBinding.etLoginEmail.setText("admin@gmail.com");
-        activityLoginBinding.etLoginPassword.setText("123456");
-
-        prefrences = new SharedValues(this);
-        if(prefrences.getBooleanValue("session")){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        }
-    }
-
-    private void setSupportActionBar(Toolbar toolbar) {
     }
 
     @Override
     public void onClick(View v) {
 
-        if (v == activityLoginBinding.btnLogin)
-        {
+        if (v == activityLoginBinding.btnLogin) {
+            userLogin();
 
-            login();
-
-         /*  *//* String email = activityLoginBinding.etLoginEmail.getText().toString();
-            String password = activityLoginBinding.etLoginPassword.getText().toString();
-            Log.d("Clicked", "--------------- email : " + email);
-            Log.e("Clicked", "--------------- Password : " + password);
-            if (email.equalsIgnoreCase("admin@gmail.com") && password.equalsIgnoreCase("123456")) {
-                prefrences.saveLoginData(email, password, true);
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            } else {
-                Toast.makeText(LoginActivity.this, "your username and password is incorrect!", Toast.LENGTH_LONG).show();*//*
-            }*/
-
-        }else   if (v == activityLoginBinding.tvSignUp)
-        {
+        } else if (v == activityLoginBinding.tvSignUp) {
             Intent intent = new Intent(this, SignupActivity.class);
             startActivity(intent);
-
         }
-
 
 
     }
 
-    private void login(){
-        Call<Response> call = RetrofitClient
+    private void userLogin() {
+
+
+        Call<LoginResponce> call = RetrofitClient
                 .getmInstance()
                 .getWebApis()
-                .login(activityLoginBinding.etLoginEmail, activityLoginBinding.etLoginPassword);
+                .loginUser();
 
-        call.enqueue(new Callback<Response>() {
+        call.enqueue(new Callback<LoginResponce>() {
             @Override
-            public void onResponse(Call<Response> call, Response<Response> response) {
+            public void onResponse(Call<LoginResponce> call, Response<LoginResponce> response) {
+                if (response.isSuccessful()) {
 
+                    Toast.makeText(LoginActivity.this, "-------Login  Responce  successfull-----", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    Toast.makeText(LoginActivity.this, "-------Login   UNsuccessfull-----", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
+            public void onFailure(Call<LoginResponce> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "-------Login  Responce UN successfull-----", Toast.LENGTH_LONG).show();
 
             }
         });
-
     }
 }

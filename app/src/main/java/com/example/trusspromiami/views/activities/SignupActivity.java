@@ -22,6 +22,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         activitySignupBinding = DataBindingUtil.setContentView(this, R.layout.activity_signup);
 
         activitySignupBinding.btnSignUp.setOnClickListener(this);
+        activitySignupBinding.tvSignIn.setOnClickListener(this);
     }
 
     @Override
