@@ -8,5 +8,4 @@ public class AppConstants {
     public static final String ENGLISH = "en";
     public static final String SPANISH = "es";
     public static final String PORTUGUES = "pt";
-
 }
