@@ -14,17 +14,22 @@ import com.example.trusspromiami.R;
 import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.helpers.SharedValues;
 import com.example.trusspromiami.databinding.ActivityLoginBinding;
+import com.example.trusspromiami.listeners.IResponse;
+import com.example.trusspromiami.models.login.LoginResponse;
+import com.example.trusspromiami.retrofit.retrofitClients.LoginApiClient;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener{
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private ActivityLoginBinding activityLoginBinding;
 
     private SharedValues prefrences;
+    String email = "";
+    String password = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+        activityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
 
         activityLoginBinding.tvSignUp.setOnClickListener(this);
@@ -34,7 +39,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         activityLoginBinding.etLoginPassword.setText("123456");
 
         prefrences = new SharedValues(this);
-        if(prefrences.getBooleanValue("session")){
+        if (prefrences.getBooleanValue("session")) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
     }
@@ -45,30 +50,44 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        if (v == activityLoginBinding.btnLogin)
-        {
+        if (v == activityLoginBinding.btnLogin) {
 
-            String email = activityLoginBinding.etLoginEmail.getText().toString();
-            String password = activityLoginBinding.etLoginPassword.getText().toString();
+            email = activityLoginBinding.etLoginEmail.getText().toString();
+            password = activityLoginBinding.etLoginPassword.getText().toString();
 
-            Log.d("Clicked", "--------------- email : " + email);
-            Log.e("Clicked", "--------------- Password : " + password);
-
-            if (email.equalsIgnoreCase("admin@gmail.com") && password.equalsIgnoreCase("123456")) {
-                prefrences.saveLoginData(email, password, true);
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            } else {
-                Toast.makeText(LoginActivity.this, "your username and password is incorrect!", Toast.LENGTH_LONG).show();
+            if (email.isEmpty()) {
+                showToast(getString(R.string.enter_email));
+                return;
             }
 
-        }else   if (v == activityLoginBinding.tvSignUp)
-        {
+            if (password.isEmpty()) {
+                showToast(getString(R.string.enter_password));
+                return;
+            }
+
+            CallToApi();
+        } else if (v == activityLoginBinding.tvSignUp) {
             Intent intent = new Intent(this, SignupActivity.class);
             startActivity(intent);
+        }
+    }
 
+    private void CallToApi() {
+        progressDialog.show();
+        LoginApiClient.loginApiCall(email, password, loginResponseStringIResponse);
+    }
+
+    private IResponse<LoginResponse, String> loginResponseStringIResponse = new IResponse<LoginResponse, String>() {
+        @Override
+        public void onSuccess(LoginResponse result) {
+
+            if (result != null)
+                showToast(getString(R.string.login_successfully));
         }
 
-
-
-    }
+        @Override
+        public void onFailure(String error) {
+            showToast(error);
+        }
+    };
 }

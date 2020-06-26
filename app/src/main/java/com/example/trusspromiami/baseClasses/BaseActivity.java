@@ -5,9 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +16,9 @@ import com.example.trusspromiami.R;
 import com.example.trusspromiami.helpers.LanguageHelper;
 import com.example.trusspromiami.views.activities.MainActivity;
 
-import org.w3c.dom.Text;
-
 public class BaseActivity extends AppCompatActivity {
 
-    private ProgressDialog progressDialog;
+    public ProgressDialog progressDialog;
     private View mToolbar;
 
     // override the base context of application to update default locale for this activity
@@ -34,7 +32,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Processing");
+        progressDialog.setMessage(getString(R.string.processing));
         progressDialog.setCancelable(false);
     }
 
@@ -74,4 +72,8 @@ public class BaseActivity extends AppCompatActivity {
                 finish();
         }
     };
+
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 }
