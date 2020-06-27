@@ -1,40 +1,41 @@
 package com.example.trusspromiami.views.fragments;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.trusspromiami.R;
-import com.example.trusspromiami.adapters.SliderAdapter;
 import com.example.trusspromiami.databinding.FragmentHomeBinding;
-import com.example.trusspromiami.models.SliderModel;
-import com.google.android.material.tabs.TabLayout;
+import com.example.trusspromiami.models.category.Banner;
+import com.example.trusspromiami.models.category.Category;
+import com.example.trusspromiami.views.adapters.BannerImageAdapter;
+import com.example.trusspromiami.views.adapters.CategoryAdapter;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding fragmentHomeBinding;
-    private ViewPager bannerSliderViewPager;
-    private TabLayout indicator;
-    private Timer timer;
-    final private long DELAY_TIME = 2000;
-    final private long PERIOD_TIME = 2000;
-    private int currentPage = 2;
-    List<SliderModel> sliderModelList;
+    private ArrayList<Category> categories = new ArrayList<>();
+    private ArrayList<Banner> banners = new ArrayList<>();
+    private CategoryAdapter adapter;
+    private List<ImageView> dots = new ArrayList<>();
+    int currentPage = 0;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -54,83 +55,141 @@ public class HomeFragment extends Fragment {
                 container,
                 false);
 
+        getCategoryList();
+        getBannersList();
         setSlider();
+        setupAutoPager();
+        setAdapter();
         return fragmentHomeBinding.getRoot();
     }
 
-    private void setSlider() {
-        // slider images
-        bannerSliderViewPager = fragmentHomeBinding.sliderBanner.bannerSliderViewPager;
-        indicator = fragmentHomeBinding.sliderBanner.indicator;
+    private void setAdapter() {
 
-        sliderModelList = SliderModel.getSliderList();
-
-        SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
-        bannerSliderViewPager.setAdapter(sliderAdapter);
-        bannerSliderViewPager.setClipToPadding(false);
-        bannerSliderViewPager.setPageMargin(20);
-        indicator.setupWithViewPager(bannerSliderViewPager, true);
-        bannerSliderViewPager.addOnPageChangeListener(onPageChangeListener);
-
-        startBannerSlideShow();
-
-        bannerSliderViewPager.setOnTouchListener((v, event) -> {
-            pageLope();
-            stopBannerSlideShow();
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                stopBannerSlideShow();
-            }
-            return false;
-        });
-    }
-
-
-    ///slider banner functions
-    private void pageLope() {
-        if (currentPage == sliderModelList.size()) {
-            bannerSliderViewPager.setCurrentItem(currentPage++, false);
+        if (getContext() != null) {
+            adapter = new CategoryAdapter(getContext());
+            fragmentHomeBinding.rvCategory.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            fragmentHomeBinding.rvCategory.setAdapter(adapter);
+            fragmentHomeBinding.rvCategory.setHasFixedSize(true);
+            adapter.setData(categories);
         }
     }
 
-    private void startBannerSlideShow() {
-        final Handler handler = new Handler();
-        final Runnable update = new Runnable() {
+
+    private void getCategoryList() {
+        categories = Category.getCategoryList();
+    }
+
+    private void getBannersList() {
+        banners = Banner.getBannersList();
+    }
+
+    private void setSlider() {
+
+        if (fragmentHomeBinding.dots.getChildCount() > 0)
+            fragmentHomeBinding.dots.removeAllViews();
+
+        BannerImageAdapter bannerImageAdapter = new BannerImageAdapter(getContext(), banners);
+        fragmentHomeBinding.vpImages.setAdapter(bannerImageAdapter);
+
+        Display display = ((android.view.WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        fragmentHomeBinding.vpImages.getLayoutParams().height = ((int) (display.getWidth() * 0.6));
+        fragmentHomeBinding.vpImages.getLayoutParams().width = ((int) (display.getWidth() * 1.0));
+
+        currentPage = 0;
+        addDots();
+
+    }
+
+    private void addDots() {
+
+        dots.clear();
+
+        if (banners.size() < 2) {
+            fragmentHomeBinding.dots.setVisibility(View.GONE);
+            return;
+        }
+
+        for (int i = 0; i <= banners.size() - 1; i++) {
+            ImageView dot = new ImageView(getContext());
+            dot.setImageDrawable(getResources().getDrawable(R.drawable.empty_circle));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+
+
+            fragmentHomeBinding.dots.addView(dot, params);
+
+            dot.setTag(R.string.banner_circle_tag, i);
+
+            dot.setOnClickListener(v -> {
+
+                onBannerCircleClicked(Integer.parseInt(v.getTag(R.string.banner_circle_tag).toString()));
+            });
+
+            dots.add(dot);
+        }
+
+        selectDot(0);
+
+        fragmentHomeBinding.vpImages.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void run() {
-                if (currentPage >= sliderModelList.size()) {
-                    currentPage = 0;
-                }
-                bannerSliderViewPager.setCurrentItem(currentPage++, true);
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                currentPage = position;
+                selectDot(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+    }
+
+    private void onBannerCircleClicked(int parseInt) {
+        currentPage = parseInt;
+        fragmentHomeBinding.vpImages.setCurrentItem(parseInt);
+    }
+
+    private void selectDot(int idx) {
+
+        if (getContext() == null)
+            return;
+
+        Resources res = getResources();
+        for (int i = 0; i <= banners.size() - 1; i++) {
+            int drawableId = (i == idx) ? (R.drawable.filled_circle) : (R.drawable.empty_circle);
+            Drawable drawable = res.getDrawable(drawableId);
+            dots.get(i).setImageDrawable(drawable);
+        }
+    }
+
+    private void setupAutoPager() {
+        final Handler handler = new Handler();
+
+        final Runnable update = () -> {
+
+            fragmentHomeBinding.vpImages.setCurrentItem(currentPage, true);
+            if (currentPage == banners.size()) {
+                currentPage = 0;
+            } else {
+
+                ++currentPage;
             }
         };
-        timer = new Timer();
+
+        Timer timer = new Timer();
         timer.schedule(new TimerTask() {
+
             @Override
             public void run() {
                 handler.post(update);
             }
-        }, DELAY_TIME, PERIOD_TIME);
+        }, 1000, 3500);
     }
-
-    private void stopBannerSlideShow() {
-        timer.cancel();
-    }
-
-    private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            currentPage = position;
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-            if (state == ViewPager.SCROLL_STATE_IDLE) {
-                pageLope();
-            }
-        }
-    };
 }

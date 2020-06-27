@@ -71,6 +71,7 @@ public class AccountFragment extends Fragment {
                 break;
 
             case R.id.iv_container:
+            case R.id.profile:
                 startActivity(new Intent(getContext(), AccountInformationActivity.class));
                 break;
         }
