@@ -51,5 +51,8 @@
     <string name="shop">Shop</string>
 
     <string name="banner_circle_tag" translatable="false">3</string>
+    <string name="login_successfully">Login successfully</string>
+    <string name="enter_password">Please enter your password</string>
+    <string name="enter_email">Please enter your email</string>
 
 </resources>
