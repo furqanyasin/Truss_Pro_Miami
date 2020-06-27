@@ -25,6 +25,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // Put this in your buildtypes debug section:
+            // Put this in your buildtypes release section
+            manifestPlaceholders = [usesCleartextTraffic:"false"]
+            }
+        debug{
+            manifestPlaceholders = [usesCleartextTraffic:"true"]
         }
     }
 
@@ -55,8 +61,8 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.1'
 
     // image loading and cache
     implementation 'com.github.bumptech.glide:glide:4.9.0'

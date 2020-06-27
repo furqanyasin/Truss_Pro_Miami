@@ -2,26 +2,24 @@ package com.example.trusspromiami.retrofit;
 
 import android.util.Log;
 
-import com.example.trusspromiami.helpers.AppConstants;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.trusspromiami.helpers.AppConstants.BASE_URL;
 
-public class RetrofitClient {
+public class TrussProRetrofitClient {
 
-    private static RetrofitClient retrofitClient;
+    private static TrussProRetrofitClient retrofitClient;
     private Retrofit retrofit;
 
     private static final String TAG = "ServiceGenerator";
@@ -30,24 +28,23 @@ public class RetrofitClient {
     private static final long cacheSize = 10 * 1024 * 1024; // 10MB
     String token, cartSession;
 
-
-    private RetrofitClient() {
-
-
-
-
+    private TrussProRetrofitClient() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
         retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstants.BASE_URL)
+                .baseUrl(BASE_URL)
                 .client(okHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
     }
 
-    public static RetrofitClient getInstance() {
+    public static TrussProRetrofitClient getInstance() {
 
         if (retrofitClient == null) {
-            retrofitClient = new RetrofitClient();
+            retrofitClient = new TrussProRetrofitClient();
         }
+
         return retrofitClient;
     }
 
@@ -55,9 +52,6 @@ public class RetrofitClient {
         return new OkHttpClient.Builder()
                 .readTimeout(30, TimeUnit.SECONDS)
                 .connectTimeout(30, TimeUnit.SECONDS)
-                .addInterceptor(httpLoggingInterceptor()) // used if network off OR on
-                .addNetworkInterceptor(networkInterceptor()) // only used when network is on
-                .addInterceptor(offlineInterceptor())
                 .build();
     }
 
@@ -76,13 +70,11 @@ public class RetrofitClient {
     private Interceptor networkInterceptor() {
         return chain -> {
             Log.d(TAG, "network interceptor: called.");
-
             Response response = chain.proceed(chain.request());
 
             CacheControl cacheControl = new CacheControl.Builder()
                     .maxAge(1, TimeUnit.HOURS)
                     .build();
-
 
             return response.newBuilder()
                     .removeHeader(HEADER_PRAGMA)
@@ -91,18 +83,6 @@ public class RetrofitClient {
                     .build();
         };
     }
-
-    private static Interceptor offlineInterceptor() {
-        return chain -> {
-            Log.d(TAG, "offline interceptor: called.");
-            Request request = chain.request();
-            return chain.proceed(request);
-        };
-    }
-
-   /* private static Cache cache() {
-        return new Cache(new File(AppConstants.mContext.getCacheDir(), AppConstants.APP_NAME), cacheSize);
-    }*/
 
     private OkHttpClient getOkHttpClient() {
 

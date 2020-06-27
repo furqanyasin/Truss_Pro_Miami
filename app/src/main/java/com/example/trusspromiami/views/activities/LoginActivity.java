@@ -15,6 +15,7 @@ import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.helpers.SharedValues;
 import com.example.trusspromiami.databinding.ActivityLoginBinding;
 import com.example.trusspromiami.listeners.IResponse;
+import com.example.trusspromiami.models.LoginResponce;
 import com.example.trusspromiami.models.login.LoginResponse;
 import com.example.trusspromiami.retrofit.retrofitClients.LoginApiClient;
 
@@ -35,8 +36,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         activityLoginBinding.tvSignUp.setOnClickListener(this);
         activityLoginBinding.btnLogin.setOnClickListener(this);
 
-        activityLoginBinding.etLoginEmail.setText("admin@gmail.com");
-        activityLoginBinding.etLoginPassword.setText("123456");
+        activityLoginBinding.etLoginEmail.setText("trusspro_admin@mail.com");
+        activityLoginBinding.etLoginPassword.setText("12345678");
 
         prefrences = new SharedValues(this);
         if (prefrences.getBooleanValue("session")) {
@@ -81,13 +82,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         @Override
         public void onSuccess(LoginResponse result) {
 
+            progressDialog.hide();
             if (result != null)
                 showToast(getString(R.string.login_successfully));
+
+            result.getApiToken()
         }
 
         @Override
         public void onFailure(String error) {
-            showToast(error);
+            progressDialog.hide();
+          Log.d("login_failure",error);
+          showToast(error);
         }
     };
 }
