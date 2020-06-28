@@ -25,5 +25,7 @@
     <dimen name="_50dp">50dp</dimen>
     <dimen name="_100dp">100dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <string name="ProductDimensionRatio">1:1</string>
+
 
 </resources>

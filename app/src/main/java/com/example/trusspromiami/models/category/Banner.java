@@ -33,12 +33,12 @@ public class Banner {
 
     public static ArrayList<Banner> getBannersList() {
 
-        ArrayList<Banner> categories = new ArrayList<>();
+        ArrayList<Banner> banners = new ArrayList<>();
 
         for (int iterator = 0; iterator < 5; iterator++) {
-            categories.add(new Banner(AppConstants.TEST_IMAGE, iterator));
+            banners.add(new Banner(AppConstants.TEST_IMAGE, iterator));
         }
 
-        return categories;
+        return banners;
     }
 }
