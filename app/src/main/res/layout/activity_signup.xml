@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
@@ -16,7 +16,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
-            android:layout_gravity="center|top"
+            android:layout_gravity="center"
 
             android:orientation="vertical">
 
@@ -25,61 +25,6 @@
                 android:layout_height="110dp"
                 android:layout_gravity="center"
                 android:src="@drawable/logopng" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ti_sign_up_username"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:textColorHint="@color/colorWhite"
-                app:boxStrokeColor="@color/colorWhite"
-                app:hintTextColor="@color/colorWhite">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_sign_up_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Username"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/colorWhite" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ti_sign_up_first_name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:textColorHint="@color/colorWhite"
-                app:boxStrokeColor="@color/colorWhite"
-                app:hintTextColor="@color/colorWhite">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_sign_up_first_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="First Name"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/colorWhite" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ti_sign_up_last_name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:textColorHint="@color/colorWhite"
-                app:boxStrokeColor="@color/colorWhite"
-                app:hintTextColor="@color/colorWhite">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_sign_up_last_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Last Name"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/colorWhite" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ti_sign_up_email"
@@ -94,7 +39,7 @@
                     android:id="@+id/et_sign_up_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/colorWhite" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -114,7 +59,7 @@
                     android:id="@+id/et_sign_up_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="textPassword"
                     android:textColor="@color/colorWhite" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -134,10 +79,19 @@
                     android:id="@+id/et_sign_up_confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm Password"
+                    android:hint="@string/confirm_password"
                     android:inputType="textPassword"
                     android:textColor="@color/colorWhite" />
             </com.google.android.material.textfield.TextInputLayout>
+
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5dp"
+                android:textColor="@color/colorWhite"
+                android:text="I agree to the terms*" />
 
             <Button
                 android:id="@+id/btn_sign_up"

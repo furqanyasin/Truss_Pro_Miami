@@ -52,7 +52,10 @@
 
     <string name="banner_circle_tag" translatable="false">3</string>
     <string name="login_successfully">Login successfully</string>
+    <string name="signup_successfully">SignUp successfully</string>
     <string name="enter_password">Please enter your password</string>
     <string name="enter_email">Please enter your email</string>
+    <string name="confirm_password">Password do not match</string>
+    <string name="chech_box">"Please checked Terms"</string>
 
 </resources>

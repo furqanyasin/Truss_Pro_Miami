@@ -2,6 +2,8 @@ package com.example.trusspromiami.helpers;
 
 public class AppConstants {
 
+
+    public static final String TEST_IMAGE = "https://www.lalaland.pk/storage/home_banners/181_1588320396.jpg";
     public static final String BASE_URL = "http://demo.trusspro.pstore.website/";
 
     public static final String SESSION = "session";

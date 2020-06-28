@@ -24,6 +24,7 @@ import com.example.trusspromiami.models.category.Category;
 import com.example.trusspromiami.views.adapters.BannerImageAdapter;
 import com.example.trusspromiami.views.adapters.CategoryAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
