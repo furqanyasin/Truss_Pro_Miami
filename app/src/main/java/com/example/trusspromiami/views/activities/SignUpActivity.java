@@ -96,6 +96,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
             progressDialog.hide();
             Log.d("sign_up_failure", error);
             showToast(error);
+
         }
     };
 
