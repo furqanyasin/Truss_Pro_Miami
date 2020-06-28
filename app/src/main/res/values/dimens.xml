@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_height">45dp</dimen>
     <dimen name="fab_margin_24">24dp</dimen>
     <dimen name="fab_margin_half">8dp</dimen>
 
@@ -25,7 +25,6 @@
     <dimen name="_50dp">50dp</dimen>
     <dimen name="_100dp">100dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <string name="ProductDimensionRatio">1:1</string>
 
 
 </resources>
