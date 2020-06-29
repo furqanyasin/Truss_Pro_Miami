@@ -18,13 +18,12 @@
             android:src="@drawable/logo" />
 
         <ProgressBar
-            android:id="@+id/progressBar"
-            style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            style="?android:attr/progressBarStyle"
             android:layout_marginTop="@dimen/_150dp"
             android:indeterminateDrawable="@drawable/circle"/>
+
 
 
     </LinearLayout>

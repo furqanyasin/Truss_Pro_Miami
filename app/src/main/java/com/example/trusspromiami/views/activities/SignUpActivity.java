@@ -20,9 +20,8 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
 
     private ActivitySignupBinding activitySignupBinding;
 
-    String email ="", password ="", confirmPassword = "";
+    String email, password, confirmPassword;
 
-    private SharedValues prefrences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +31,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         activitySignupBinding.btnSignUp.setOnClickListener(this);
         activitySignupBinding.tvSignIn.setOnClickListener(this);
 
-        activitySignupBinding.etSignUpEmail.setText("trusspro_admin@mail.com");
-        activitySignupBinding.etSignUpPassword.setText("12345678");
-        activitySignupBinding.etSignUpConfirmPassword.setText("12345678");
 
-        prefrences = new SharedValues(this);
-        if (prefrences.getBooleanValue("session")) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        }
     }
 
 

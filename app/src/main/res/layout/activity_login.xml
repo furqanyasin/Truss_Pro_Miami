@@ -34,9 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textColorHint="@color/colorDarkGray"
-                app:boxStrokeColor="@color/colorDarkGray"
-                app:hintTextColor="@color/colorDarkGray">
+                android:textColorHint="@color/colorBlack"
+                app:boxStrokeColor="@color/colorBlack"
+                app:hintTextColor="@color/colorBlack">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_login_email"
@@ -46,7 +46,7 @@
                     android:cursorVisible="true"
                     android:textCursorDrawable="@drawable/cursor_color"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/colorDarkGray" />
+                    android:textColor="@color/colorBlack" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -55,10 +55,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textColorHint="@color/colorDarkGray"
-                app:boxStrokeColor="@color/colorDarkGray"
+                android:textColorHint="@color/colorBlack"
+                app:boxStrokeColor="@color/colorBlack"
                 app:endIconMode="password_toggle"
-                app:endIconTint="@color/colorDarkGray">
+                app:endIconTint="@color/colorBlack">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_login_password"
@@ -68,7 +68,7 @@
                     android:textCursorDrawable="@drawable/cursor_color"
                     android:cursorVisible="true"
                     android:inputType="textPassword"
-                    android:textColor="@color/colorDarkGray" />
+                    android:textColor="@color/colorBlack" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -84,9 +84,9 @@
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
+                android:layout_margin="5dp"
                 android:padding="10dp"
+                android:background="@drawable/btn_background"
                 android:text="@string/sign_in"
                 android:textAllCaps="false"
                 android:textSize="18sp" />
@@ -97,9 +97,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
+                android:layout_margin="2dp"
                 android:text="@string/don_t_have_an_account_sign_up"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 

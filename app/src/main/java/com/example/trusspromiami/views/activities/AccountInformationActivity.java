@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.baseClasses.BaseActivity;
