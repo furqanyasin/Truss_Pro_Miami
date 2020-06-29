@@ -52,5 +52,9 @@
     <string name="login_successfully">Login successfully</string>
     <string name="enter_password">Please enter your password</string>
     <string name="enter_email">Please enter your email</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
 
 </resources>
