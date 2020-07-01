@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -19,24 +21,34 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.databinding.FragmentHomeBinding;
+import com.example.trusspromiami.listeners.IResponse;
 import com.example.trusspromiami.models.category.Banner;
 import com.example.trusspromiami.models.category.Category;
+import com.example.trusspromiami.models.category.CategoryResponse;
+import com.example.trusspromiami.models.category.Datum;
+import com.example.trusspromiami.retrofit.retrofitClients.CategoryApiClient;
+import com.example.trusspromiami.retrofit.retrofitClients.SignUpApiClient;
 import com.example.trusspromiami.views.adapters.BannerImageAdapter;
 import com.example.trusspromiami.views.adapters.CategoryAdapter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding fragmentHomeBinding;
-    private ArrayList<Category> categories = new ArrayList<>();
+    private ArrayList<CategoryResponse> categories = new ArrayList<>();
     private ArrayList<Banner> banners = new ArrayList<>();
     private CategoryAdapter adapter;
     private List<ImageView> dots = new ArrayList<>();
     int currentPage = 0;
+
+    String status, message, data;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -56,11 +68,13 @@ public class HomeFragment extends Fragment {
                 container,
                 false);
 
+        CallToApi();
         getCategoryList();
         getBannersList();
         setSlider();
         setupAutoPager();
         setAdapter();
+        CallToApi();
         return fragmentHomeBinding.getRoot();
     }
 
@@ -77,7 +91,8 @@ public class HomeFragment extends Fragment {
 
 
     private void getCategoryList() {
-        categories = Category.getCategoryList();
+        categories = CategoryResponse.data();
+
     }
 
     private void getBannersList() {
@@ -193,4 +208,21 @@ public class HomeFragment extends Fragment {
             }
         }, 1000, 3500);
     }
+
+    private void CallToApi() {
+        CategoryApiClient.CategoryApiClient(status,message,data,CategoryResponseStringIResponse);
+    }
+
+    private IResponse<CategoryResponse,String> CategoryResponseStringIResponse = new IResponse<CategoryResponse, String>() {
+        @Override
+        public void onSuccess(CategoryResponse result) {
+
+        }
+
+        @Override
+        public void onFailure(String error) {
+
+        }
+    };
+
 }

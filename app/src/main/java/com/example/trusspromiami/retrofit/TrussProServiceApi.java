@@ -1,10 +1,12 @@
 package com.example.trusspromiami.retrofit;
 
+import com.example.trusspromiami.models.category.CategoryResponse;
 import com.example.trusspromiami.models.login.LoginResponse;
 import com.example.trusspromiami.models.signup.Data;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -27,6 +29,12 @@ public interface TrussProServiceApi {
                        @Query("password")String password,
                        @Query("retype_password") String confirmPassword,
                        @Query("terms_agreement") int termsAgreement);
+
+
+    @GET("categories")
+    Call<CategoryResponse> categories (@Query("status") String status,
+                                       @Query("message") String message,
+                                       @Query("data") String data);
 
 
 }

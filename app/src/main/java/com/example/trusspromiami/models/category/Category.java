@@ -42,7 +42,7 @@ public class Category {
 
         ArrayList<Category> categories = new ArrayList<>();
 
-        for (int iterator = 0; iterator < 12; iterator++) {
+        for (int iterator = 0; iterator < 5; iterator++) {
             categories.add(new Category("category" + iterator, "https://demo.trusspro.pstore.website/storage/category/aeBatAicLa8CTwfrr8q4JvFYilrFkynnyq9jzEfF.jpeg", iterator));
             categories.add(new Category("category" + iterator, "https://demo.trusspro.pstore.website/storage/category/3cieJlemGzouRK7mT0IDH2UoNU9WMP1ESjbMnoZu.jpeg", iterator));
             categories.add(new Category("category" + iterator, "https://demo.trusspro.pstore.website/storage/products/15/B3ZwwP5Oudry49zk6eWAYZLx6ib8U27u0uFwohwo.png", iterator));

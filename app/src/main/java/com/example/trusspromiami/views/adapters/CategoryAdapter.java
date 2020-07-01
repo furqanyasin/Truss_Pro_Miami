@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide;
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.databinding.ItemCategoryLayoutBinding;
 import com.example.trusspromiami.models.category.Category;
+import com.example.trusspromiami.models.category.CategoryResponse;
+import com.example.trusspromiami.models.category.Datum;
 
 import java.util.ArrayList;
 
@@ -19,7 +21,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     private LayoutInflater mInflater;
     private ItemCategoryLayoutBinding itemCategoryLayoutBinding;
-    private ArrayList<Category> categories;
+    private ArrayList<CategoryResponse> categories;
 
     public CategoryAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
@@ -42,8 +44,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categories.size();
     }
 
-    public void setData(ArrayList<Category> categoryArrayList) {
-        categories = categoryArrayList;
+    public void setData(ArrayList<CategoryResponse> data) {
+        categories = data;
         notifyDataSetChanged();
     }
 
@@ -56,10 +58,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             itemCategoryLayoutBinding = mItemCategoryLayoutBinding;
         }
 
-        public void bindHolder(Category category) {
+        public void bindHolder(CategoryResponse category) {
 
             Glide.with(itemCategoryLayoutBinding.getRoot().getContext())
-                    .load(category.getImageUrl())
+                    .load(category.getData())
                     .into(itemCategoryLayoutBinding.ivCategory);
 
             itemCategoryLayoutBinding.executePendingBindings();
