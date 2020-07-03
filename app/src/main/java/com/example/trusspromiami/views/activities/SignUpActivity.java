@@ -10,9 +10,8 @@ import android.view.View;
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.databinding.ActivitySignupBinding;
-import com.example.trusspromiami.helpers.SharedValues;
 import com.example.trusspromiami.listeners.IResponse;
-import com.example.trusspromiami.models.signup.Data;
+import com.example.trusspromiami.models.signup.SignupData;
 import com.example.trusspromiami.retrofit.retrofitClients.SignUpApiClient;
 
 public class SignUpActivity extends BaseActivity implements View.OnClickListener {
@@ -75,9 +74,9 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         SignUpApiClient.SignUpApiClient(email, password, confirmPassword, signUpResponseStringIResponse);
     }
 
-    private IResponse<Data, String> signUpResponseStringIResponse = new IResponse<Data, String>() {
+    private IResponse<SignupData, String> signUpResponseStringIResponse = new IResponse<SignupData, String>() {
         @Override
-        public void onSuccess(Data result) {
+        public void onSuccess(SignupData result) {
             progressDialog.hide();
             if (result != null)
                 showToast(getString(R.string.signup_successfully));
@@ -88,7 +87,6 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
             progressDialog.hide();
             Log.d("sign_up_failure", error);
             showToast(error);
-
         }
     };
 

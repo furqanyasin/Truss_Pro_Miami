@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.databinding.ItemCategoryLayoutBinding;
-import com.example.trusspromiami.models.category.Category;
+import com.example.trusspromiami.models.category.CategoriesData;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     private LayoutInflater mInflater;
     private ItemCategoryLayoutBinding itemCategoryLayoutBinding;
-    private ArrayList<Category> categories;
+    private ArrayList<CategoriesData> categories = new ArrayList();
 
     public CategoryAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
@@ -42,7 +42,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categories.size();
     }
 
-    public void setData(ArrayList<Category> categoryArrayList) {
+    public void setData(ArrayList<CategoriesData> categoryArrayList) {
         categories = categoryArrayList;
         notifyDataSetChanged();
     }
@@ -56,10 +56,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             itemCategoryLayoutBinding = mItemCategoryLayoutBinding;
         }
 
-        public void bindHolder(Category category) {
+        public void bindHolder(CategoriesData category) {
+
+            itemCategoryLayoutBinding.tvCategoryName.setText(category.getTitle());
 
             Glide.with(itemCategoryLayoutBinding.getRoot().getContext())
-                    .load(category.getImageUrl())
+                    .load(category.getImage())
+                    .fitCenter()
                     .into(itemCategoryLayoutBinding.ivCategory);
 
             itemCategoryLayoutBinding.executePendingBindings();

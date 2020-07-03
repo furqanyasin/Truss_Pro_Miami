@@ -18,9 +18,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.trusspromiami.R;
+import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.databinding.FragmentHomeBinding;
+import com.example.trusspromiami.helpers.AppHelper;
+import com.example.trusspromiami.listeners.IResponse;
 import com.example.trusspromiami.models.category.Banner;
-import com.example.trusspromiami.models.category.Category;
+import com.example.trusspromiami.models.category.CategoriesData;
+import com.example.trusspromiami.retrofit.retrofitClients.CategoriesApiClient;
 import com.example.trusspromiami.views.adapters.BannerImageAdapter;
 import com.example.trusspromiami.views.adapters.CategoryAdapter;
 
@@ -29,10 +33,12 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.example.trusspromiami.App.getContext;
+
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding fragmentHomeBinding;
-    private ArrayList<Category> categories = new ArrayList<>();
+    private ArrayList<CategoriesData> categories = new ArrayList<>();
     private ArrayList<Banner> banners = new ArrayList<>();
     private CategoryAdapter adapter;
     private List<ImageView> dots = new ArrayList<>();
@@ -71,13 +77,13 @@ public class HomeFragment extends Fragment {
             fragmentHomeBinding.rvCategory.setLayoutManager(new GridLayoutManager(getContext(), 2));
             fragmentHomeBinding.rvCategory.setAdapter(adapter);
             fragmentHomeBinding.rvCategory.setHasFixedSize(true);
-            adapter.setData(categories);
         }
     }
 
 
     private void getCategoryList() {
-        categories = Category.getCategoryList();
+        ((BaseActivity) getActivity()).progressDialog.hide();
+        CategoriesApiClient.getCategoriesCall(0, listener);
     }
 
     private void getBannersList() {
@@ -112,7 +118,7 @@ public class HomeFragment extends Fragment {
 
         for (int i = 0; i <= banners.size() - 1; i++) {
             ImageView dot = new ImageView(getContext());
-            dot.setImageDrawable(getResources().getDrawable(R.drawable.empty_circle));
+            dot.setImageDrawable(getContext().getResources().getDrawable(R.drawable.empty_circle));
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -193,4 +199,22 @@ public class HomeFragment extends Fragment {
             }
         }, 1000, 3500);
     }
+
+    private IResponse<ArrayList<CategoriesData>, String> listener = new IResponse<ArrayList<CategoriesData>, String>() {
+        @Override
+        public void onSuccess(ArrayList<CategoriesData> result) {
+
+            ((BaseActivity) getActivity()).progressDialog.hide();
+            if (result != null && !result.isEmpty()) {
+                categories = result;
+                adapter.setData(categories);
+            }
+        }
+
+        @Override
+        public void onFailure(String error) {
+            ((BaseActivity) getActivity()).progressDialog.hide();
+            ((BaseActivity) getActivity()).showToast(error);
+        }
+    };
 }

@@ -27,10 +27,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             // Put this in your buildtypes debug section:
             // Put this in your buildtypes release section
-            manifestPlaceholders = [usesCleartextTraffic:"false"]
-            }
-        debug{
-            manifestPlaceholders = [usesCleartextTraffic:"true"]
+            manifestPlaceholders = [usesCleartextTraffic: "false"]
+        }
+        debug {
+            manifestPlaceholders = [usesCleartextTraffic: "true"]
         }
     }
 

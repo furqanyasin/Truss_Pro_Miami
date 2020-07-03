@@ -1,10 +1,9 @@
-package com.example.trusspromiami.models.login;
+package com.example.trusspromiami.models.signup;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
-
+public class SignupResponse {
     @SerializedName("status")
     @Expose
     private Integer status;
@@ -13,7 +12,7 @@ public class LoginResponse {
     private String message;
     @SerializedName("data")
     @Expose
-    private LoginData data;
+    private SignupData data;
 
     public Integer getStatus() {
         return status;
@@ -31,12 +30,11 @@ public class LoginResponse {
         this.message = message;
     }
 
-    public LoginData getData() {
+    public SignupData getData() {
         return data;
     }
 
-    public void setData(LoginData data) {
+    public void setData(SignupData data) {
         this.data = data;
     }
-
 }

@@ -3,7 +3,6 @@ package com.example.trusspromiami.retrofit.retrofitClients;
 import com.example.trusspromiami.listeners.IResponse;
 import com.example.trusspromiami.models.login.LoginResponse;
 import com.example.trusspromiami.retrofit.RetrofitClient;
-import com.example.trusspromiami.retrofit.TrussProRetrofitClient;
 import com.example.trusspromiami.retrofit.TrussProServiceApi;
 
 import retrofit2.Call;

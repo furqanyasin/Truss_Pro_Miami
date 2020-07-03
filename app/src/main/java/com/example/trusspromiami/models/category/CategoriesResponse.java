@@ -1,9 +1,12 @@
-package com.example.trusspromiami.models.login;
+package com.example.trusspromiami.models.category;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
+public class CategoriesResponse {
 
     @SerializedName("status")
     @Expose
@@ -13,7 +16,7 @@ public class LoginResponse {
     private String message;
     @SerializedName("data")
     @Expose
-    private LoginData data;
+    private ArrayList<CategoriesData> data = null;
 
     public Integer getStatus() {
         return status;
@@ -31,11 +34,11 @@ public class LoginResponse {
         this.message = message;
     }
 
-    public LoginData getData() {
+    public ArrayList<CategoriesData> getData() {
         return data;
     }
 
-    public void setData(LoginData data) {
+    public void setData(ArrayList<CategoriesData> data) {
         this.data = data;
     }
 

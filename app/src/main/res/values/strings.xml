@@ -61,5 +61,6 @@
     <string name="last_name">Last Name</string>
     <string name="subject">Subject</string>
     <string name="message">Message</string>
+    <string name="i_agree_to_the_terms">I agree to the terms*</string>
 
 </resources>
