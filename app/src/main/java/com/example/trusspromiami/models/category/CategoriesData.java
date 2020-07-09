@@ -3,7 +3,9 @@ package com.example.trusspromiami.models.category;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CategoriesData {
+import java.io.Serializable;
+
+public class CategoriesData implements Serializable {
 
     @SerializedName("id")
     @Expose

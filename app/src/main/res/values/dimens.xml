@@ -26,5 +26,7 @@
     <dimen name="_100dp">100dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="_11sp">11sp</dimen>
+
 
 </resources>

@@ -4,11 +4,8 @@ import android.util.Log;
 
 import com.example.trusspromiami.helpers.AppConstants;
 
-
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -32,8 +29,6 @@ public class RetrofitClient {
 
 
     private RetrofitClient() {
-
-
 
 
         retrofit = new Retrofit.Builder()
@@ -94,8 +89,8 @@ public class RetrofitClient {
 
     private static Interceptor offlineInterceptor() {
         return chain -> {
-            Log.d(TAG, "offline interceptor: called.");
             Request request = chain.request();
+//            Request request = chain.request().newBuilder().addHeader("Accept", "application/json").build();
             return chain.proceed(request);
         };
     }

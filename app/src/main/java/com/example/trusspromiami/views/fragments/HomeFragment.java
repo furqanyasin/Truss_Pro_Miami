@@ -1,6 +1,7 @@
 package com.example.trusspromiami.views.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -20,11 +21,13 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.databinding.FragmentHomeBinding;
-import com.example.trusspromiami.helpers.AppHelper;
+import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.listeners.IResponse;
+import com.example.trusspromiami.listeners.OnItemClickInterface;
 import com.example.trusspromiami.models.category.Banner;
 import com.example.trusspromiami.models.category.CategoriesData;
 import com.example.trusspromiami.retrofit.retrofitClients.CategoriesApiClient;
+import com.example.trusspromiami.views.activities.ProductListing;
 import com.example.trusspromiami.views.adapters.BannerImageAdapter;
 import com.example.trusspromiami.views.adapters.CategoryAdapter;
 
@@ -32,8 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static com.example.trusspromiami.App.getContext;
 
 public class HomeFragment extends Fragment {
 
@@ -73,7 +74,7 @@ public class HomeFragment extends Fragment {
     private void setAdapter() {
 
         if (getContext() != null) {
-            adapter = new CategoryAdapter(getContext());
+            adapter = new CategoryAdapter(getContext(), onItemClickInterface);
             fragmentHomeBinding.rvCategory.setLayoutManager(new GridLayoutManager(getContext(), 2));
             fragmentHomeBinding.rvCategory.setAdapter(adapter);
             fragmentHomeBinding.rvCategory.setHasFixedSize(true);
@@ -82,7 +83,8 @@ public class HomeFragment extends Fragment {
 
 
     private void getCategoryList() {
-        ((BaseActivity) getActivity()).progressDialog.hide();
+        if (getActivity() == null) return;
+        ((BaseActivity) getActivity()).progressDialog.show();
         CategoriesApiClient.getCategoriesCall(0, listener);
     }
 
@@ -216,5 +218,11 @@ public class HomeFragment extends Fragment {
             ((BaseActivity) getActivity()).progressDialog.hide();
             ((BaseActivity) getActivity()).showToast(error);
         }
+    };
+
+    private OnItemClickInterface onItemClickInterface = index -> {
+        Intent intent = new Intent(getContext(), ProductListing.class);
+        intent.putExtra(AppConstants.CATEGORY_OBJ, categories.get(index));
+        startActivity(intent);
     };
 }

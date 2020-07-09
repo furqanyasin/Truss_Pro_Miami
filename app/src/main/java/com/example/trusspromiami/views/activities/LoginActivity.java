@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toolbar;
 
 import androidx.databinding.DataBindingUtil;
 
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.databinding.ActivityLoginBinding;
-import com.example.trusspromiami.helpers.SharedValues;
+import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.listeners.IResponse;
 import com.example.trusspromiami.models.login.LoginResponse;
 import com.example.trusspromiami.retrofit.retrofitClients.LoginApiClient;
@@ -19,8 +18,6 @@ import com.example.trusspromiami.retrofit.retrofitClients.LoginApiClient;
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private ActivityLoginBinding activityLoginBinding;
-
-    private SharedValues prefrences;
     String email = "";
     String password = "";
 
@@ -35,14 +32,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         activityLoginBinding.etLoginEmail.setText("trusspro_admin@mail.com");
         activityLoginBinding.etLoginPassword.setText("12345678");
-
-        prefrences = new SharedValues(this);
-        if (prefrences.getBooleanValue("session")) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        }
-    }
-
-    private void setSupportActionBar(Toolbar toolbar) {
     }
 
     @Override
@@ -80,8 +69,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         public void onSuccess(LoginResponse result) {
 
             progressDialog.hide();
-            if (result != null)
+            if (result != null) {
+                appPreference.setString(AppConstants.TOKEN, result.getData().getApiToken());
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 showToast(getString(R.string.login_successfully));
+                startActivity(intent);
+            }
         }
 
         @Override

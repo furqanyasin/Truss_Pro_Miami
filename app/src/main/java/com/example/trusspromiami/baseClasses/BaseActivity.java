@@ -13,12 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.trusspromiami.R;
+import com.example.trusspromiami.helpers.AppPreference;
 import com.example.trusspromiami.helpers.LanguageHelper;
 import com.example.trusspromiami.views.activities.MainActivity;
 
 public class BaseActivity extends AppCompatActivity {
 
     public ProgressDialog progressDialog;
+    public AppPreference appPreference;
     private View mToolbar;
 
     // override the base context of application to update default locale for this activity
@@ -34,6 +36,8 @@ public class BaseActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.processing));
         progressDialog.setCancelable(false);
+
+        appPreference = AppPreference.getInstance(this);
     }
 
     public void setLayout(int layoutId, Integer toolbar, boolean isHomeEnable) {

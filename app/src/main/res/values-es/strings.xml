@@ -57,5 +57,6 @@
     <string name="subject">Subject</string>
     <string name="message">Message</string>
     <string name="i_agree_to_the_terms">I agree to the terms*</string>
-
+    <string name="confirm_password">Confirm Password </string>
+    <string name="chech_box">"Please checked Terms"</string>
 </resources>

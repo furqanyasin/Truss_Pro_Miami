@@ -1,11 +1,11 @@
 package com.example.trusspromiami.views.activities;
 
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+
+import androidx.databinding.DataBindingUtil;
 
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.baseClasses.BaseActivity;
@@ -59,7 +59,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
                 showToast(getString(R.string.confirm_password));
                 return;
             }
-            if (checkBox==false){
+            if (checkBox == false) {
                 showToast(getString(R.string.chech_box));
                 return;
             }
@@ -78,8 +78,12 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
         @Override
         public void onSuccess(SignupData result) {
             progressDialog.hide();
-            if (result != null)
+            if (result != null) {
+                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 showToast(getString(R.string.signup_successfully));
+                startActivity(intent);
+            }
         }
 
         @Override

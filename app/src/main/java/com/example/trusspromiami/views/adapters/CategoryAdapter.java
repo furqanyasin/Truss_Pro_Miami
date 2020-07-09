@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.databinding.ItemCategoryLayoutBinding;
+import com.example.trusspromiami.listeners.OnItemClickInterface;
 import com.example.trusspromiami.models.category.CategoriesData;
 
 import java.util.ArrayList;
@@ -20,9 +21,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private LayoutInflater mInflater;
     private ItemCategoryLayoutBinding itemCategoryLayoutBinding;
     private ArrayList<CategoriesData> categories = new ArrayList();
+    private OnItemClickInterface mOnItemClickInterface;
 
-    public CategoryAdapter(Context context) {
+    public CategoryAdapter(Context context, OnItemClickInterface onItemClickInterface) {
         this.mInflater = LayoutInflater.from(context);
+        mOnItemClickInterface = onItemClickInterface;
     }
 
     @NonNull
@@ -62,8 +65,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
             Glide.with(itemCategoryLayoutBinding.getRoot().getContext())
                     .load(category.getImage())
+                    .placeholder(R.drawable.placeholder_white)
                     .fitCenter()
                     .into(itemCategoryLayoutBinding.ivCategory);
+
+            itemCategoryLayoutBinding.btnShop.setOnClickListener(view -> {
+                if (getAdapterPosition() != RecyclerView.NO_POSITION)
+                    mOnItemClickInterface.onClickItem(getAdapterPosition());
+            });
 
             itemCategoryLayoutBinding.executePendingBindings();
         }
