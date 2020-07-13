@@ -1,5 +1,6 @@
 package com.example.trusspromiami.views.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -34,7 +35,7 @@ public class ProductListing extends BaseActivity {
         activityProductListingBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_listing);
         categoriesData = (CategoriesData) getIntent().getExtras().get(AppConstants.CATEGORY_OBJ);
 
-        activityProductListingBinding.productListingToolbar.activityTitle.setText(categoriesData.getTitle());
+        activityProductListingBinding.productListingToolbar.activityTitle.setText(categoriesData.getTitle().toUpperCase());
         activityProductListingBinding.productListingToolbar.actionBtn.setVisibility(View.GONE);
         activityProductListingBinding.productListingToolbar.ivBackArrow.setOnClickListener(view -> {
             onBackPressed();
@@ -79,7 +80,9 @@ public class ProductListing extends BaseActivity {
     private OnItemClickInterface onItemClickInterface = new OnItemClickInterface() {
         @Override
         public void onClickItem(Integer index) {
-            Toast.makeText(ProductListing.this, mProductDataArrayList.get(index).getTitle(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ProductListing.this, ProductDetailActivity.class);
+            intent.putExtra(AppConstants.PRODUCT, mProductDataArrayList.get(index));
+            startActivity(intent);
         }
     };
 

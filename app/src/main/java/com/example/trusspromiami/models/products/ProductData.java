@@ -3,7 +3,9 @@ package com.example.trusspromiami.models.products;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ProductData {
+import java.io.Serializable;
+
+public class ProductData implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -13,7 +15,7 @@ public class ProductData {
     private String title;
     @SerializedName("description")
     @Expose
-    private Object description;
+    private String description;
     @SerializedName("image")
     @Expose
     private String image;
@@ -73,11 +75,11 @@ public class ProductData {
         this.title = title;
     }
 
-    public Object getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Object description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

@@ -346,7 +346,7 @@ public class AppUtils {
         return String.valueOf(Math.round(percentage)).concat("% OFF");
     }
 
-    public static void showSalePrice(TextView textView) {
+    public static void showStrikeOnTextView(TextView textView) {
         textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);  // making price for sales
     }
 

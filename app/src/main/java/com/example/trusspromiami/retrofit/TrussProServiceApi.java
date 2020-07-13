@@ -2,17 +2,17 @@ package com.example.trusspromiami.retrofit;
 
 import com.example.trusspromiami.models.category.CategoriesResponse;
 import com.example.trusspromiami.models.login.LoginResponse;
+import com.example.trusspromiami.models.productDetail.ProductDetailResponse;
 import com.example.trusspromiami.models.products.ProductResponse;
 import com.example.trusspromiami.models.signup.SignupResponse;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
@@ -39,4 +39,7 @@ public interface TrussProServiceApi {
 
     @GET("api/category-1")
     Call<ProductResponse> getProducts(@HeaderMap Map<String, String> token, @Query("page") Integer pageNumber);
+
+    @GET("api/product/{id}")
+    Call<ProductDetailResponse> getProductDetail(@HeaderMap Map<String, String> token, @Path("id") Integer id);
 }

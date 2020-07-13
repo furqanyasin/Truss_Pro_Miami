@@ -2,6 +2,8 @@ package com.example.trusspromiami.retrofit.retrofitClients;
 
 import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.listeners.IResponse;
+import com.example.trusspromiami.models.productDetail.ProductDetailData;
+import com.example.trusspromiami.models.productDetail.ProductDetailResponse;
 import com.example.trusspromiami.models.products.ProductData;
 import com.example.trusspromiami.models.products.ProductResponse;
 import com.example.trusspromiami.retrofit.RetrofitClient;
@@ -38,6 +40,31 @@ public class ProductApiClient {
 
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
+                listener.onFailure(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public static void getProductsDetail(String mToken, Integer productId, IResponse<ProductDetailData, String> listener) {
+        TrussProServiceApi trussProServiceApi = RetrofitClient.getInstance().createClient();
+
+        String token = AppConstants.BEARER + " " + mToken;
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", token);
+        map.put("Accept", "application/json");
+
+        Call<ProductDetailResponse> call = trussProServiceApi.getProductDetail(map, productId);
+
+        call.enqueue(new Callback<ProductDetailResponse>() {
+            @Override
+            public void onResponse(Call<ProductDetailResponse> call, Response<ProductDetailResponse> response) {
+                if (response.isSuccessful()) {
+                    listener.onSuccess(response.body().getProductDetailData());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductDetailResponse> call, Throwable t) {
                 listener.onFailure(t.getLocalizedMessage());
             }
         });

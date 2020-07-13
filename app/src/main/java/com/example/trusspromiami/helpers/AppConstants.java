@@ -25,4 +25,6 @@ public class AppConstants {
     public static final String PORTUGUES = "pt";
 
     public static final String CATEGORY_OBJ = "category_obj";
+    public static final String CURRENCY_DOLLAR_SIGN = "$";
+        public static final String PRODUCT = "product";
 }

@@ -43,11 +43,41 @@
             android:padding="@dimen/_12dp"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/_16dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Done" />
 
+        <ImageView
+
+            android:id="@+id/iv_action_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12dp"
+            android:layout_marginEnd="@dimen/fab_margin_24"
+            android:padding="@dimen/_6dp"
+            android:src="@drawable/ic_add_shopping_cart_white_24dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_16dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/bg_circle"
+            android:text="12"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintBottom_toTopOf="@+id/iv_action_btn"
+            app:layout_constraintEnd_toEndOf="@+id/iv_action_btn"
+            app:layout_constraintStart_toEndOf="@+id/iv_action_btn"
+            app:layout_constraintTop_toTopOf="@+id/iv_action_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

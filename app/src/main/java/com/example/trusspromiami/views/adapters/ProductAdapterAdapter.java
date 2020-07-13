@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.databinding.ItemProductLayoutBinding;
+import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.helpers.AppUtils;
 import com.example.trusspromiami.listeners.OnItemClickInterface;
 import com.example.trusspromiami.models.products.ProductData;
@@ -65,14 +66,14 @@ public class ProductAdapterAdapter extends RecyclerView.Adapter<ProductAdapterAd
 
             itemProductLayoutBinding.tvProductName.setText(productData.getTitle());
 
-            if (productData.getDiscountedPrice() != "-") {
-                itemProductLayoutBinding.tvPrice.setText(productData.getDiscountedPrice());
-                itemProductLayoutBinding.tvActualPrice.setText(productData.getPrice());
-                AppUtils.showSalePrice(itemProductLayoutBinding.tvActualPrice);
-                itemProductLayoutBinding.tvPrice.setVisibility(View.VISIBLE);
-            } else {
-                itemProductLayoutBinding.tvPrice.setText(productData.getPrice());
+            if (productData.getDiscountedPrice() == null || productData.getDiscountedPrice() == "-") {
+                itemProductLayoutBinding.tvPrice.setText(String.format("%s%s", AppConstants.CURRENCY_DOLLAR_SIGN, productData.getPrice()));
                 itemProductLayoutBinding.tvActualPrice.setVisibility(View.GONE);
+            } else {
+                itemProductLayoutBinding.tvPrice.setText(String.format("%s%s", AppConstants.CURRENCY_DOLLAR_SIGN, productData.getDiscountedPrice()));
+                itemProductLayoutBinding.tvActualPrice.setText(String.format("%s%s", AppConstants.CURRENCY_DOLLAR_SIGN, productData.getPrice()));
+                itemProductLayoutBinding.tvPrice.setVisibility(View.VISIBLE);
+                AppUtils.showStrikeOnTextView(itemProductLayoutBinding.tvActualPrice);
             }
 
             Glide.with(itemProductLayoutBinding.getRoot().getContext())

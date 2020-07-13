@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.trusspromiami.R;
@@ -75,7 +76,7 @@ public class HomeFragment extends Fragment {
 
         if (getContext() != null) {
             adapter = new CategoryAdapter(getContext(), onItemClickInterface);
-            fragmentHomeBinding.rvCategory.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            fragmentHomeBinding.rvCategory.setLayoutManager(new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, true));
             fragmentHomeBinding.rvCategory.setAdapter(adapter);
             fragmentHomeBinding.rvCategory.setHasFixedSize(true);
         }

@@ -62,5 +62,6 @@
     <string name="subject">Subject</string>
     <string name="message">Message</string>
     <string name="i_agree_to_the_terms">I agree to the terms*</string>
+    <string name="add_to_cart">Add to Cart</string>
 
 </resources>

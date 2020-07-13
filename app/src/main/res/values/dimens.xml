@@ -7,6 +7,7 @@
     <dimen name="_4dp">4dp</dimen>
     <dimen name="_12dp">12dp</dimen>
     <dimen name="_8dp">8dp</dimen>
+    <dimen name="_6dp">6dp</dimen>
     <dimen name="_150dp">150dp</dimen>
     <dimen name="_30dp">30dp</dimen>
     <dimen name="_5dp">5dp</dimen>
@@ -25,7 +26,6 @@
     <dimen name="_50dp">50dp</dimen>
     <dimen name="_100dp">100dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-
     <dimen name="_11sp">11sp</dimen>
 
 
