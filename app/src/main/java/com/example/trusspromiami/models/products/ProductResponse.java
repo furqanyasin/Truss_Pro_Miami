@@ -3,11 +3,7 @@ package com.example.trusspromiami.models.products;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ProductResponse {
-
     @SerializedName("status")
     @Expose
     private Integer status;
@@ -16,7 +12,7 @@ public class ProductResponse {
     private String message;
     @SerializedName("data")
     @Expose
-    private ArrayList<ProductData> data = new ArrayList<>();
+    private ProductData productData;
 
     public Integer getStatus() {
         return status;
@@ -34,11 +30,11 @@ public class ProductResponse {
         this.message = message;
     }
 
-    public ArrayList<ProductData> getData() {
-        return data;
+    public ProductData getProductData() {
+        return productData;
     }
 
-    public void setData(ArrayList<ProductData> data) {
-        this.data = data;
+    public void setProductData(ProductData productData) {
+        this.productData = productData;
     }
 }

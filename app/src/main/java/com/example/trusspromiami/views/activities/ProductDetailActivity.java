@@ -15,13 +15,13 @@ import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.helpers.AppUtils;
 import com.example.trusspromiami.listeners.IResponse;
 import com.example.trusspromiami.models.productDetail.ProductDetailData;
-import com.example.trusspromiami.models.products.ProductData;
+import com.example.trusspromiami.models.products.Product;
 import com.example.trusspromiami.retrofit.retrofitClients.ProductApiClient;
 
 public class ProductDetailActivity extends BaseActivity {
 
     private ActivityProductDetailBinding activityProductDetailBinding;
-    private ProductData productData;
+    private Product productData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class ProductDetailActivity extends BaseActivity {
 
         activityProductDetailBinding = DataBindingUtil.setContentView(this,
                 R.layout.activity_product_detail);
-        productData = (ProductData) getIntent().getExtras().get(AppConstants.PRODUCT);
+        productData = (Product) getIntent().getExtras().get(AppConstants.PRODUCT);
 //        getProductDetail();
         setProductDetail();
     }

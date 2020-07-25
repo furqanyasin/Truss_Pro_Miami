@@ -3,11 +3,9 @@ package com.example.trusspromiami.views.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.baseClasses.BaseActivity;
@@ -16,6 +14,7 @@ import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.listeners.IResponse;
 import com.example.trusspromiami.listeners.OnItemClickInterface;
 import com.example.trusspromiami.models.category.CategoriesData;
+import com.example.trusspromiami.models.products.Product;
 import com.example.trusspromiami.models.products.ProductData;
 import com.example.trusspromiami.retrofit.retrofitClients.ProductApiClient;
 import com.example.trusspromiami.views.adapters.ProductAdapterAdapter;
@@ -26,7 +25,7 @@ public class ProductListing extends BaseActivity {
 
     private CategoriesData categoriesData;
     private ActivityProductListingBinding activityProductListingBinding;
-    private ArrayList<ProductData> mProductDataArrayList = new ArrayList<>();
+    private ArrayList<Product> mProductDataArrayList = new ArrayList<>();
     private ProductAdapterAdapter productAdapterAdapter;
 
     @Override
@@ -58,13 +57,13 @@ public class ProductListing extends BaseActivity {
         ProductApiClient.getProductsCall(token, categoriesData.getId(), listener);
     }
 
-    private IResponse<ArrayList<ProductData>, String> listener = new IResponse<ArrayList<ProductData>, String>() {
+    private IResponse<ProductData, String> listener = new IResponse<ProductData, String>() {
         @Override
-        public void onSuccess(ArrayList<ProductData> result) {
+        public void onSuccess(ProductData result) {
 
             progressDialog.hide();
-            if (result != null && !result.isEmpty()) {
-                mProductDataArrayList = result;
+            if (result != null && result.getData() != null) {
+                mProductDataArrayList = result.getData();
                 productAdapterAdapter.setData(mProductDataArrayList);
                 productAdapterAdapter.notifyDataSetChanged();
             }

@@ -9,7 +9,6 @@ import com.example.trusspromiami.models.products.ProductResponse;
 import com.example.trusspromiami.retrofit.RetrofitClient;
 import com.example.trusspromiami.retrofit.TrussProServiceApi;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,21 +19,18 @@ import retrofit2.Response;
 public class ProductApiClient {
 
 
-    public static void getProductsCall(String mToken, Integer categoryId, IResponse<ArrayList<ProductData>, String> listener) {
+    public static void getProductsCall(String mToken, Integer categoryId, IResponse<ProductData, String> listener) {
         TrussProServiceApi trussProServiceApi = RetrofitClient.getInstance().createClient();
 
         String token = AppConstants.BEARER + " " + mToken;
-        Map<String, String> map = new HashMap<>();
-        map.put("Authorization", token);
-        map.put("Accept", "application/json");
 
-        Call<ProductResponse> call = trussProServiceApi.getProducts(map, categoryId);
+        Call<ProductResponse> call = trussProServiceApi.getProducts(categoryId, token);
 
         call.enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()) {
-                    listener.onSuccess(response.body().getData());
+                    listener.onSuccess(response.body().getProductData());
                 }
             }
 

@@ -37,8 +37,9 @@ public interface TrussProServiceApi {
     @GET("api/categories")
     Call<CategoriesResponse> getCategories(@Query("page_number") Integer pageNumber);
 
-    @GET("api/category-1")
-    Call<ProductResponse> getProducts(@HeaderMap Map<String, String> token, @Query("page") Integer pageNumber);
+    @Headers("Accept: application/json")
+    @GET("api/category/{id}")
+    Call<ProductResponse> getProducts(@Path("id") Integer id, @Query("auth_token") String authToken);
 
     @GET("api/product/{id}")
     Call<ProductDetailResponse> getProductDetail(@HeaderMap Map<String, String> token, @Path("id") Integer id);

@@ -3,196 +3,141 @@ package com.example.trusspromiami.models.products;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
-public class ProductData implements Serializable {
+public class ProductData {
 
-    @SerializedName("id")
+    @SerializedName("current_page")
     @Expose
-    private Integer id;
-    @SerializedName("title")
+    private Integer currentPage;
+    @SerializedName("data")
     @Expose
-    private String title;
-    @SerializedName("description")
+    private ArrayList<Product> data = null;
+    @SerializedName("first_page_url")
     @Expose
-    private String description;
-    @SerializedName("image")
+    private String firstPageUrl;
+    @SerializedName("from")
     @Expose
-    private String image;
-    @SerializedName("price")
+    private Integer from;
+    @SerializedName("last_page")
     @Expose
-    private String price;
-    @SerializedName("discounted_price")
+    private Integer lastPage;
+    @SerializedName("last_page_url")
     @Expose
-    private String discountedPrice;
-    @SerializedName("currency")
+    private String lastPageUrl;
+    @SerializedName("next_page_url")
     @Expose
-    private String currency;
-    @SerializedName("stock")
+    private Object nextPageUrl;
+    @SerializedName("path")
     @Expose
-    private String stock;
-    @SerializedName("rating")
+    private String path;
+    @SerializedName("per_page")
     @Expose
-    private Object rating;
-    @SerializedName("size")
+    private Integer perPage;
+    @SerializedName("prev_page_url")
     @Expose
-    private String size;
-    @SerializedName("min_order")
+    private Object prevPageUrl;
+    @SerializedName("to")
     @Expose
-    private String minOrder;
-    @SerializedName("max_order")
+    private Integer to;
+    @SerializedName("total")
     @Expose
-    private String maxOrder;
-    @SerializedName("status")
-    @Expose
-    private String status;
-    @SerializedName("category_id")
-    @Expose
-    private String categoryId;
-    @SerializedName("parent_product")
-    @Expose
-    private String parentProduct;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
-    private String updatedAt;
+    private Integer total;
 
-    public Integer getId() {
-        return id;
+    public Integer getCurrentPage() {
+        return currentPage;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
     }
 
-    public String getTitle() {
-        return title;
+    public ArrayList<Product> getData() {
+        return data;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setData(ArrayList<Product> data) {
+        this.data = data;
     }
 
-    public String getDescription() {
-        return description;
+    public String getFirstPageUrl() {
+        return firstPageUrl;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setFirstPageUrl(String firstPageUrl) {
+        this.firstPageUrl = firstPageUrl;
     }
 
-    public String getImage() {
-        return image;
+    public Integer getFrom() {
+        return from;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setFrom(Integer from) {
+        this.from = from;
     }
 
-    public String getPrice() {
-        return price;
+    public Integer getLastPage() {
+        return lastPage;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setLastPage(Integer lastPage) {
+        this.lastPage = lastPage;
     }
 
-    public String getDiscountedPrice() {
-        return discountedPrice;
+    public String getLastPageUrl() {
+        return lastPageUrl;
     }
 
-    public void setDiscountedPrice(String discountedPrice) {
-        this.discountedPrice = discountedPrice;
+    public void setLastPageUrl(String lastPageUrl) {
+        this.lastPageUrl = lastPageUrl;
     }
 
-    public String getCurrency() {
-        return currency;
+    public Object getNextPageUrl() {
+        return nextPageUrl;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setNextPageUrl(Object nextPageUrl) {
+        this.nextPageUrl = nextPageUrl;
     }
 
-    public String getStock() {
-        return stock;
+    public String getPath() {
+        return path;
     }
 
-    public void setStock(String stock) {
-        this.stock = stock;
+    public void setPath(String path) {
+        this.path = path;
     }
 
-    public Object getRating() {
-        return rating;
+    public Integer getPerPage() {
+        return perPage;
     }
 
-    public void setRating(Object rating) {
-        this.rating = rating;
+    public void setPerPage(Integer perPage) {
+        this.perPage = perPage;
     }
 
-    public String getSize() {
-        return size;
+    public Object getPrevPageUrl() {
+        return prevPageUrl;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setPrevPageUrl(Object prevPageUrl) {
+        this.prevPageUrl = prevPageUrl;
     }
 
-    public String getMinOrder() {
-        return minOrder;
+    public Integer getTo() {
+        return to;
     }
 
-    public void setMinOrder(String minOrder) {
-        this.minOrder = minOrder;
+    public void setTo(Integer to) {
+        this.to = to;
     }
 
-    public String getMaxOrder() {
-        return maxOrder;
+    public Integer getTotal() {
+        return total;
     }
 
-    public void setMaxOrder(String maxOrder) {
-        this.maxOrder = maxOrder;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getParentProduct() {
-        return parentProduct;
-    }
-
-    public void setParentProduct(String parentProduct) {
-        this.parentProduct = parentProduct;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
 }

@@ -15,7 +15,7 @@ import com.example.trusspromiami.databinding.ItemProductLayoutBinding;
 import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.helpers.AppUtils;
 import com.example.trusspromiami.listeners.OnItemClickInterface;
-import com.example.trusspromiami.models.products.ProductData;
+import com.example.trusspromiami.models.products.Product;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class ProductAdapterAdapter extends RecyclerView.Adapter<ProductAdapterAd
 
     private LayoutInflater mInflater;
     private ItemProductLayoutBinding itemProductLayoutBinding;
-    private ArrayList<ProductData> mProductDataArrayList = new ArrayList();
+    private ArrayList<Product> mProductDataArrayList = new ArrayList();
     private OnItemClickInterface mOnItemClickInterface;
 
     public ProductAdapterAdapter(Context context, OnItemClickInterface onItemClickInterface) {
@@ -34,7 +34,8 @@ public class ProductAdapterAdapter extends RecyclerView.Adapter<ProductAdapterAd
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        itemProductLayoutBinding = DataBindingUtil.inflate(mInflater, R.layout.item_product_layout, parent, false);
+        itemProductLayoutBinding = DataBindingUtil.inflate(mInflater,
+                R.layout.item_product_layout, parent, false);
         return new ProductViewHolder(itemProductLayoutBinding);
     }
 
@@ -48,7 +49,7 @@ public class ProductAdapterAdapter extends RecyclerView.Adapter<ProductAdapterAd
         return mProductDataArrayList.size();
     }
 
-    public void setData(ArrayList<ProductData> productDataArrayList) {
+    public void setData(ArrayList<Product> productDataArrayList) {
         mProductDataArrayList = productDataArrayList;
         notifyDataSetChanged();
     }
@@ -62,22 +63,25 @@ public class ProductAdapterAdapter extends RecyclerView.Adapter<ProductAdapterAd
             itemProductLayoutBinding = mItemCategoryLayoutBinding;
         }
 
-        public void bindHolder(ProductData productData) {
+        public void bindHolder(Product product) {
 
-            itemProductLayoutBinding.tvProductName.setText(productData.getTitle());
+            itemProductLayoutBinding.tvProductName.setText(product.getTitle());
 
-            if (productData.getDiscountedPrice() == null || productData.getDiscountedPrice() == "-") {
-                itemProductLayoutBinding.tvPrice.setText(String.format("%s%s", AppConstants.CURRENCY_DOLLAR_SIGN, productData.getPrice()));
+            if (product.getDiscountedPrice() == null || product.getDiscountedPrice() == "-") {
+                itemProductLayoutBinding.tvPrice.setText(String.format("%s%s",
+                        AppConstants.CURRENCY_DOLLAR_SIGN, product.getPrice()));
                 itemProductLayoutBinding.tvActualPrice.setVisibility(View.GONE);
             } else {
-                itemProductLayoutBinding.tvPrice.setText(String.format("%s%s", AppConstants.CURRENCY_DOLLAR_SIGN, productData.getDiscountedPrice()));
-                itemProductLayoutBinding.tvActualPrice.setText(String.format("%s%s", AppConstants.CURRENCY_DOLLAR_SIGN, productData.getPrice()));
+                itemProductLayoutBinding.tvPrice.setText(String.format("%s%s",
+                        AppConstants.CURRENCY_DOLLAR_SIGN, product.getDiscountedPrice()));
+                itemProductLayoutBinding.tvActualPrice.setText(String.format("%s%s",
+                        AppConstants.CURRENCY_DOLLAR_SIGN, product.getPrice()));
                 itemProductLayoutBinding.tvPrice.setVisibility(View.VISIBLE);
                 AppUtils.showStrikeOnTextView(itemProductLayoutBinding.tvActualPrice);
             }
 
             Glide.with(itemProductLayoutBinding.getRoot().getContext())
-                    .load(productData.getImage())
+                    .load(product.getFullImagePath())
                     .placeholder(R.drawable.placeholder_white)
                     .fitCenter()
                     .into(itemProductLayoutBinding.ivProduct);
