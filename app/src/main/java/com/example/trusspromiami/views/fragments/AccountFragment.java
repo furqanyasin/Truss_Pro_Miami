@@ -10,13 +10,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.example.trusspromiami.R;
+import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.databinding.FragmentAccountBinding;
-import com.example.trusspromiami.databinding.FragmentHomeBinding;
+import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.views.activities.AccountInformationActivity;
 import com.example.trusspromiami.views.activities.LanguageListing;
 import com.example.trusspromiami.views.activities.LoginActivity;
-import com.example.trusspromiami.views.activities.MainActivity;
-import com.example.trusspromiami.views.activities.SearchActivity;
 
 
 /**
@@ -25,6 +24,7 @@ import com.example.trusspromiami.views.activities.SearchActivity;
 public class AccountFragment extends Fragment {
 
     private FragmentAccountBinding fragmentAccountBinding;
+    private String token;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -43,6 +43,13 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
 
         fragmentAccountBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false);
+        token = ((BaseActivity) getActivity()).appPreference.getString(AppConstants.TOKEN);
+
+        if (token.isEmpty())
+            fragmentAccountBinding.tvLoginLogout.setText(R.string.login);
+        else
+            fragmentAccountBinding.tvLoginLogout.setText(R.string.logout);
+
 
         setListeners();
         return fragmentAccountBinding.getRoot();
@@ -54,7 +61,6 @@ public class AccountFragment extends Fragment {
         fragmentAccountBinding.contactUs.setOnClickListener(mOnClickListener);
         fragmentAccountBinding.language.setOnClickListener(mOnClickListener);
         fragmentAccountBinding.ivContainer.setOnClickListener(mOnClickListener);
-
         fragmentAccountBinding.tvLoginLogout.setOnClickListener(mOnClickListener);
     }
 
@@ -67,7 +73,14 @@ public class AccountFragment extends Fragment {
                 break;
 
             case R.id.tv_login_logout:
-                startActivity(new Intent(getContext(), LoginActivity.class));
+                if (token.isEmpty())
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                else {
+                    ((BaseActivity) getActivity()).appPreference.setString(AppConstants.TOKEN, AppConstants.EMPTY_STRING);
+                    token = ((BaseActivity) getActivity()).appPreference.getString(AppConstants.TOKEN);
+                    fragmentAccountBinding.tvLoginLogout.setText(R.string.login);
+                }
+
                 break;
 
             case R.id.iv_container:

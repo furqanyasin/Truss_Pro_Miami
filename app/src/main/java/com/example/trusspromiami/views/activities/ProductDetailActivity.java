@@ -46,11 +46,11 @@ public class ProductDetailActivity extends BaseActivity {
         activityProductDetailBinding.ivProductImage.getLayoutParams().width = ((int) (display.getWidth() * 1.0));
 
         Glide.with(this)
-                .load(productData.getImage())
+                .load(productData.getFullImagePath())
                 .placeholder(R.drawable.placeholder_white)
                 .into(activityProductDetailBinding.ivProductImage);
 
-        if (productData.getDiscountedPrice() != null || productData.getDiscountedPrice() != "-") {
+        if (productData.getDiscountedPrice() != null || productData.getDiscountedPrice() != AppConstants.HIPHEN) {
             activityProductDetailBinding.tvProductSalePrice.setText(AppConstants.CURRENCY_DOLLAR_SIGN + productData.getDiscountedPrice());
             activityProductDetailBinding.tvProductActualPrice.setText(AppConstants.CURRENCY_DOLLAR_SIGN + productData.getPrice());
             AppUtils.showStrikeOnTextView(activityProductDetailBinding.tvProductActualPrice);

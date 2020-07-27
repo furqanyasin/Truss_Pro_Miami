@@ -22,7 +22,7 @@ public class ProductApiClient {
     public static void getProductsCall(String mToken, Integer categoryId, IResponse<ProductData, String> listener) {
         TrussProServiceApi trussProServiceApi = RetrofitClient.getInstance().createClient();
 
-        String token = AppConstants.BEARER + " " + mToken;
+        String token = AppConstants.BEARER + AppConstants.SPACE + mToken;
 
         Call<ProductResponse> call = trussProServiceApi.getProducts(categoryId, token);
 

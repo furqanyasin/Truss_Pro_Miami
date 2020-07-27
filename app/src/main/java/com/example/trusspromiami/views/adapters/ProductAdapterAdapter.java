@@ -67,7 +67,7 @@ public class ProductAdapterAdapter extends RecyclerView.Adapter<ProductAdapterAd
 
             itemProductLayoutBinding.tvProductName.setText(product.getTitle());
 
-            if (product.getDiscountedPrice() == null || product.getDiscountedPrice() == "-") {
+            if (product.getDiscountedPrice() == null || product.getDiscountedPrice() == AppConstants.HIPHEN) {
                 itemProductLayoutBinding.tvPrice.setText(String.format("%s%s",
                         AppConstants.CURRENCY_DOLLAR_SIGN, product.getPrice()));
                 itemProductLayoutBinding.tvActualPrice.setVisibility(View.GONE);
@@ -83,7 +83,6 @@ public class ProductAdapterAdapter extends RecyclerView.Adapter<ProductAdapterAd
             Glide.with(itemProductLayoutBinding.getRoot().getContext())
                     .load(product.getFullImagePath())
                     .placeholder(R.drawable.placeholder_white)
-                    .fitCenter()
                     .into(itemProductLayoutBinding.ivProduct);
 
             itemProductLayoutBinding.getRoot().setOnClickListener(view -> {

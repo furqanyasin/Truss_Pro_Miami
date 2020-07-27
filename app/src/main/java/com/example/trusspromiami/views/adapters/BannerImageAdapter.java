@@ -14,19 +14,18 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.Glide;
 import com.example.trusspromiami.R;
 import com.example.trusspromiami.databinding.ItemSliderBinding;
-import com.example.trusspromiami.databinding.SliderItemBinding;
-import com.example.trusspromiami.models.category.Banner;
+import com.example.trusspromiami.models.bannerImage.BannerImage;
 
 import java.util.List;
 
 public class BannerImageAdapter extends PagerAdapter {
 
     private ItemSliderBinding itemSliderBinding;
-    List<Banner> homeBanner;
+    List<BannerImage> homeBanner;
     Context context;
     LayoutInflater layoutInflater;
 
-    public BannerImageAdapter(Context context, List<Banner> banners) {
+    public BannerImageAdapter(Context context, List<BannerImage> banners) {
         this.context = context;
         homeBanner = banners;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -51,13 +50,13 @@ public class BannerImageAdapter extends PagerAdapter {
         itemSliderBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_slider, container, false);
 
         itemSliderBinding.ivSlider.setOnClickListener(v -> {
-            Toast.makeText(context, homeBanner.get(position).getCategoryId().toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, homeBanner.get(position).getId().toString(), Toast.LENGTH_SHORT).show();
         });
 
         Glide
                 .with(context)
-                .load(homeBanner.get(position).getImageUrl())
-                .placeholder(R.drawable.one)
+                .load(homeBanner.get(position).getImage())
+                .placeholder(R.drawable.placeholder_white)
                 .centerCrop()
                 .into(itemSliderBinding.ivSlider);
 

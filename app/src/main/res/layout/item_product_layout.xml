@@ -20,7 +20,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:contentDescription="@string/todo"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 app:layout_constraintDimensionRatio="3:4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
                 android:layout_marginTop="@dimen/_12dp"
                 android:text="SPECIAL OFFER"
                 android:textColor="@color/colorBlack"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_product" />
 

@@ -25,9 +25,11 @@ import com.example.trusspromiami.databinding.FragmentHomeBinding;
 import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.listeners.IResponse;
 import com.example.trusspromiami.listeners.OnItemClickInterface;
-import com.example.trusspromiami.models.category.Banner;
+import com.example.trusspromiami.models.bannerImage.BannerData;
+import com.example.trusspromiami.models.bannerImage.BannerImage;
 import com.example.trusspromiami.models.category.CategoriesData;
 import com.example.trusspromiami.retrofit.retrofitClients.CategoriesApiClient;
+import com.example.trusspromiami.retrofit.retrofitClients.MiscApiClient;
 import com.example.trusspromiami.views.activities.ProductListing;
 import com.example.trusspromiami.views.adapters.BannerImageAdapter;
 import com.example.trusspromiami.views.adapters.CategoryAdapter;
@@ -41,7 +43,7 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding fragmentHomeBinding;
     private ArrayList<CategoriesData> categories = new ArrayList<>();
-    private ArrayList<Banner> banners = new ArrayList<>();
+    private ArrayList<BannerImage> banners = new ArrayList<>();
     private CategoryAdapter adapter;
     private List<ImageView> dots = new ArrayList<>();
     int currentPage = 0;
@@ -66,7 +68,6 @@ public class HomeFragment extends Fragment {
 
         getCategoryList();
         getBannersList();
-        setSlider();
         setupAutoPager();
         setAdapter();
         return fragmentHomeBinding.getRoot();
@@ -90,7 +91,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void getBannersList() {
-        banners = Banner.getBannersList();
+        if (getActivity() == null) return;
+        ((BaseActivity) getActivity()).progressDialog.show();
+        String token = ((BaseActivity) getActivity()).appPreference.getString(AppConstants.TOKEN);
+        MiscApiClient.getBanners(token, bannerListener);
     }
 
     private void setSlider() {
@@ -225,5 +229,19 @@ public class HomeFragment extends Fragment {
         Intent intent = new Intent(getContext(), ProductListing.class);
         intent.putExtra(AppConstants.CATEGORY_OBJ, categories.get(index));
         startActivity(intent);
+    };
+
+    private IResponse<ArrayList<BannerData>, String> bannerListener = new IResponse<ArrayList<BannerData>, String>() {
+        @Override
+        public void onSuccess(ArrayList<BannerData> result) {
+            banners = result.get(0).getBannerImages();
+            setSlider();
+        }
+
+        @Override
+        public void onFailure(String error) {
+            ((BaseActivity) getActivity()).progressDialog.hide();
+            ((BaseActivity) getActivity()).showToast(error);
+        }
     };
 }

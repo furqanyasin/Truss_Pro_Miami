@@ -1,5 +1,6 @@
 package com.example.trusspromiami.retrofit;
 
+import com.example.trusspromiami.models.bannerImage.BannerImageResponse;
 import com.example.trusspromiami.models.category.CategoriesResponse;
 import com.example.trusspromiami.models.login.LoginResponse;
 import com.example.trusspromiami.models.productDetail.ProductDetailResponse;
@@ -20,6 +21,10 @@ public interface TrussProServiceApi {
 
     @GET
     Call<String> testResponse(@Url String url);
+
+    @Headers("Accept: application/json")
+    @GET("api/banner/list")
+    Call<BannerImageResponse> getBanners(@Query("auth_token") String token);
 
     @Headers("Accept: application/json")
     @GET("api/login")
