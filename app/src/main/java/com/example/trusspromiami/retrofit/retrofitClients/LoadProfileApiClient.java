@@ -1,5 +1,6 @@
 package com.example.trusspromiami.retrofit.retrofitClients;
 
+import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.listeners.IResponse;
 import com.example.trusspromiami.models.login.LoginResponse;
 import com.example.trusspromiami.retrofit.RetrofitClient;
@@ -16,7 +17,9 @@ public class LoadProfileApiClient {
 
     public static void getProfileApiCall(String authToken, IResponse<LoginResponse, String> listener) {
         TrussProServiceApi trussProServiceApi = RetrofitClient.getInstance().createClient();
-        Call<LoginResponse> call = trussProServiceApi.getProfile("Bearer " + authToken);
+
+        String token = AppConstants.BEARER + AppConstants.SPACE + authToken;
+        Call<LoginResponse> call = trussProServiceApi.getProfile(token);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {

@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/parent"
-
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorLightGray">
+            android:layout_height="wrap_content">
 
             <include
                 android:id="@+id/toolbar"
@@ -21,7 +19,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp"
+                android:background="@color/colorLightGray"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
                 <LinearLayout
@@ -30,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/colorWhite"
                     android:orientation="vertical"
-                    android:padding="8dp"
+                    android:padding="@dimen/_12dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -39,7 +37,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/name"
-                        android:textSize="12sp" />
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -113,6 +113,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/lo_address"
                     android:layout_width="match_parent"
@@ -129,8 +130,10 @@
                         android:id="@+id/address_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
                         android:text="@string/street_address"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/et_address"
@@ -153,6 +156,7 @@
                         android:id="@+id/address_error_tv"
                         layout="@layout/error_text_layout" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/lo_city"
                     android:layout_width="match_parent"
@@ -169,8 +173,10 @@
                         android:id="@+id/city_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="@string/city"
-                        android:textSize="12sp" />
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/et_city"
@@ -193,6 +199,7 @@
                         android:id="@+id/city_error_tv"
                         layout="@layout/error_text_layout" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/lo_state"
                     android:layout_width="match_parent"
@@ -208,8 +215,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/home_address"
-
-                        android:textSize="12sp" />
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp" />
 
                     <Spinner
                         android:id="@+id/state_spinner"
@@ -226,6 +234,7 @@
                         layout="@layout/error_text_layout" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/lo_postal"
                     android:layout_width="match_parent"
@@ -240,8 +249,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/whats_your_zip_code"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/et_zip_code"
@@ -251,6 +261,7 @@
                         android:hint="@string/enter_zip"
                         android:imeOptions="actionDone"
                         android:inputType="number"
+                        android:textColor="@color/colorBlack"
                         android:lines="1"
                         android:maxLength="10"
                         android:textSize="14sp" />
@@ -261,6 +272,7 @@
                         layout="@layout/error_text_layout" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/lo_phone"
                     android:layout_width="match_parent"
@@ -277,8 +289,10 @@
                         android:id="@+id/phone_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"
                         android:text="@string/phone"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/et_phone"
@@ -301,6 +315,7 @@
                         android:id="@+id/phone_error_tv"
                         layout="@layout/error_text_layout" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/lo_billing_address"
                     android:layout_width="match_parent"
@@ -318,7 +333,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/billing_address"
-                        android:textSize="12sp" />
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/et_billing_address"
@@ -341,6 +358,7 @@
                         android:id="@+id/address_billing_error_tv"
                         layout="@layout/error_text_layout" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/lo_address_check"
                     android:layout_width="match_parent"
@@ -355,18 +373,13 @@
                     <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/check_address_same"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:text="@string/same_address_check_text">
 
                     </androidx.appcompat.widget.AppCompatCheckBox>
 
-                    <TextView
-                        android:id="@+id/text_address_same"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="@string/same_address_check_text" />
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/lo_shipping_address"
                     android:layout_width="match_parent"
@@ -382,9 +395,11 @@
                     <TextView
                         android:id="@+id/billing_shipping_header"
                         android:layout_width="match_parent"
+                        android:textColor="@color/colorBlack"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="@string/shipping_address"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/et_shipping_address"
@@ -407,6 +422,7 @@
                         android:id="@+id/address_shipping_error_tv"
                         layout="@layout/error_text_layout" />
                 </LinearLayout>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

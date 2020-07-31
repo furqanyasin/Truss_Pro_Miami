@@ -193,6 +193,7 @@ class OrderFormActivity : BaseActivity(), View.OnClickListener {
 
         override fun onSuccess(result: LoginResponse?) {
             Log.d("result", result.toString())
+            showToast(result?.message)
 
         }
 
