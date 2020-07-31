@@ -64,4 +64,31 @@
     <string name="i_agree_to_the_terms">I agree to the terms*</string>
     <string name="add_to_cart">Add to Cart</string>
 
+    //profile
+    <!--Profile-->
+    <string name="birth_date">Birth Date</string>
+    <string name="enter_date_of_birth">Enter date of birth</string>
+    <string name="enter_address">Enter address</string>
+    <string name="home_address">State Address</string>
+    <string name="enter_email_field">Enter email</string>
+    <string name="personal_email">Personal Email</string>
+    <string name="enter_number">Enter number</string>
+    <string name="enter_name">Enter name</string>
+    <string name="city">City</string>
+    <string name="enter_city">Enter City</string>
+    <string name="whats_your_zip_code">Zip Code</string>
+    <string name="enter_zip">Enter Zip</string>
+    <string name="street_address">Street Address</string>
+    <string name="phone">Phone</string>
+    <string name="enter_phone">Enter Phone</string>
+    <string name="billing_address">Billing Address</string>
+    <string name="enter_billing_address">Enter Billing Address</string>
+    <string name="same_address_check_text"> My shipping address is same as billing</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="enter_shipping_address">Enter Shipping Address</string>
+    <string name="total_price">Total Price :</string>
+    <string name="place_your_order">Place your order</string>
+
+    <string name="this_field_is_required_new">This field cannot be empty.</string>
+
 </resources>

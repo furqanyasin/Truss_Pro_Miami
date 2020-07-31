@@ -2,6 +2,8 @@ package com.example.trusspromiami.views.activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,15 +15,18 @@ import com.example.trusspromiami.baseClasses.BaseActivity;
 import com.example.trusspromiami.databinding.ActivityProductDetailBinding;
 import com.example.trusspromiami.helpers.AppConstants;
 import com.example.trusspromiami.helpers.AppUtils;
+import com.example.trusspromiami.helpers.IntegerChangedListener;
 import com.example.trusspromiami.listeners.IResponse;
 import com.example.trusspromiami.models.productDetail.ProductDetailData;
 import com.example.trusspromiami.models.products.Product;
 import com.example.trusspromiami.retrofit.retrofitClients.ProductApiClient;
 
-public class ProductDetailActivity extends BaseActivity {
+public class ProductDetailActivity extends BaseActivity implements View.OnClickListener {
 
+    private IntegerChangedListener integerChangedListener;
     private ActivityProductDetailBinding activityProductDetailBinding;
     private Product productData;
+    private int productCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +35,34 @@ public class ProductDetailActivity extends BaseActivity {
         activityProductDetailBinding = DataBindingUtil.setContentView(this,
                 R.layout.activity_product_detail);
         productData = (Product) getIntent().getExtras().get(AppConstants.PRODUCT);
-//        getProductDetail();
+        integerChangedListener = new IntegerChangedListener();
+        setQuantityChangeListener();
         setProductDetail();
+        setClickListener();
+        setTextChangedListener();
+    }
+
+    private void setQuantityChangeListener() {
+        integerChangedListener.setChangeListener(new IntegerChangedListener.ChangeListener() {
+            @Override
+            public void onChange() {
+                changeQuantityTextView();
+            }
+        });
+
+    }
+
+    private void changeQuantityTextView() {
+        activityProductDetailBinding.quantityText.setText(String.valueOf(integerChangedListener.getQuantityValue()));
+    }
+
+    private void setTextChangedListener() {
+
+    }
+
+    private void setClickListener() {
+        activityProductDetailBinding.btnAdd.setOnClickListener(this);
+        activityProductDetailBinding.btnMinus.setOnClickListener(this);
     }
 
     private void setProductDetail() {
@@ -42,13 +73,13 @@ public class ProductDetailActivity extends BaseActivity {
         activityProductDetailBinding.detailToolbar.tvCount.setVisibility(View.VISIBLE);
         activityProductDetailBinding.detailToolbar.actionBtn.setVisibility(View.GONE);
         android.view.Display display = ((android.view.WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        activityProductDetailBinding.ivProductImage.getLayoutParams().height = ((int) (display.getHeight() * 0.65));
-        activityProductDetailBinding.ivProductImage.getLayoutParams().width = ((int) (display.getWidth() * 1.0));
-
-        Glide.with(this)
-                .load(productData.getFullImagePath())
-                .placeholder(R.drawable.placeholder_white)
-                .into(activityProductDetailBinding.ivProductImage);
+//        activityProductDetailBinding.ivProductImage.getLayoutParams().height = ((int) (display.getHeight() * 0.65));
+//        activityProductDetailBinding.ivProductImage.getLayoutParams().width = ((int) (display.getWidth() * 1.0));
+//
+//        Glide.with(this)
+//                .load(productData.getFullImagePath())
+//                .placeholder(R.drawable.placeholder_white)
+//                .into(activityProductDetailBinding.ivProductImage);
 
         if (productData.getDiscountedPrice() != null || productData.getDiscountedPrice() != AppConstants.HIPHEN) {
             activityProductDetailBinding.tvProductSalePrice.setText(AppConstants.CURRENCY_DOLLAR_SIGN + productData.getDiscountedPrice());
@@ -80,4 +111,20 @@ public class ProductDetailActivity extends BaseActivity {
             Toast.makeText(ProductDetailActivity.this, error, Toast.LENGTH_SHORT).show();
         }
     };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_add:
+                integerChangedListener.setQuantityValue(productCounter++);
+                break;
+            case R.id.btn_minus:
+                integerChangedListener.setQuantityValue(productCounter--);
+                break;
+        }
+
+
+    }
+
+
 }

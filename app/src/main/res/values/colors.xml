@@ -26,4 +26,6 @@
     <color name="colorBrandsFocus">#1E293F</color>
     <color name="colorPaymentCard">#63E9D1</color>
 
+    <color name="color_red">#FF0000</color>
+
 </resources>

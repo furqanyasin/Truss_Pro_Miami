@@ -22,16 +22,43 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_12dp">
 
-                <ImageView
+                <androidx.constraintlayout.widget.ConstraintLayout
 
-                    android:id="@+id/iv_product_image"
-                    android:layout_width="0dp"
+                    android:id="@+id/slider_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/cate"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.viewpager.widget.ViewPager
+
+                        android:id="@+id/vp_images"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+
+                        android:id="@+id/dots"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_20dp"
+                        android:layout_below="@+id/vp_images"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/_4dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_5dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/vp_images"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
                     android:id="@+id/iv_line"
@@ -39,7 +66,7 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="@dimen/_8dp"
                     android:background="@color/colorLightGray"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_product_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/slider_container" />
 
                 <TextView
                     android:id="@+id/tv_product_name"
@@ -86,6 +113,50 @@
                     tools:text="@tools:sample/lorem/random" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:padding="@dimen/_8dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_add_to_cart">
+
+            <Button
+                android:id="@+id/btn_minus"
+                style="@style/SimpleBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:text="-"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/quantity_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_add"
+                app:layout_constraintStart_toEndOf="@+id/btn_minus" />
+
+
+            <Button
+                android:id="@+id/btn_add"
+                style="@style/SimpleBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:text="+"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </Button>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
 
