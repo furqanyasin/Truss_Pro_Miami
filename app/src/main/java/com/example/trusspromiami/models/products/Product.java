@@ -13,6 +13,9 @@ public class Product implements Serializable {
     @SerializedName("title")
     @Expose
     private String title;
+    @SerializedName("product")
+    @Expose
+    private String product;
     @SerializedName("description")
     @Expose
     private String description;
@@ -204,5 +207,13 @@ public class Product implements Serializable {
 
     public void setFullImagePath(String fullImagePath) {
         this.fullImagePath = fullImagePath;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
     }
 }

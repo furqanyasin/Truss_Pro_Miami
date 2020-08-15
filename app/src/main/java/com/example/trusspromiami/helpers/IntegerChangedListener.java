@@ -1,7 +1,7 @@
 package com.example.trusspromiami.helpers;
 
 public class IntegerChangedListener {
-    private int quantityValue = 0;
+    private int quantityValue = 1;
     private ChangeListener changeListener;
 
     public int getQuantityValue() {
@@ -10,10 +10,11 @@ public class IntegerChangedListener {
     }
 
     public void setQuantityValue(int quantityValue) {
-        if (quantityValue > 0) {
+
             this.quantityValue = quantityValue;
-            if (changeListener != null) changeListener.onChange();
-        }
+            if (changeListener != null)
+                changeListener.onChange();
+
 
     }
 

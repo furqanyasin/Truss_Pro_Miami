@@ -138,7 +138,7 @@
                 android:id="@+id/quantity_text"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="0"
+                android:text="1"
                 android:textAlignment="center"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toStartOf="@+id/btn_add"

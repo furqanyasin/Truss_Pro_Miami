@@ -13,6 +13,7 @@ import com.example.trusspromiami.databinding.ActivityOrderFormBinding
 import com.example.trusspromiami.helpers.AppConstants
 import com.example.trusspromiami.listeners.IResponse
 import com.example.trusspromiami.models.login.LoginResponse
+import com.example.trusspromiami.models.orderPlacement.OrderResponse
 import com.example.trusspromiami.retrofit.retrofitClients.LoadProfileApiClient
 
 
@@ -139,10 +140,7 @@ class OrderFormActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun placeOrderClicked() {
-
-        LoadProfileApiClient.placeOrderApiCall(appPreference.getString(AppConstants.TOKEN), loginResponseStringIResponse)
-
-
+        LoadProfileApiClient.placeOrderApiCall(appPreference.getString(AppConstants.TOKEN))
     }
 
     val mTextWatcher = object : TextWatcher {
@@ -188,12 +186,13 @@ class OrderFormActivity : BaseActivity(), View.OnClickListener {
 
     }
 
-    private val loginResponseStringIResponse: IResponse<LoginResponse?, String?> = object : IResponse<LoginResponse?, String?> {
+    private val loginResponseStringIResponse: IResponse<OrderResponse?, String?> = object : IResponse<OrderResponse?, String?> {
 
 
-        override fun onSuccess(result: LoginResponse?) {
+        override fun onSuccess(result: OrderResponse?) {
             Log.d("result", result.toString())
             showToast(result?.message)
+            fillFields(result)
 
         }
 
@@ -202,6 +201,18 @@ class OrderFormActivity : BaseActivity(), View.OnClickListener {
             Log.d("login_failure", error)
             showToast(error)
         }
+    }
+
+    private fun fillFields(result: OrderResponse?) {
+
+
+        binding.firstName.setText(result?.data?.firstName.toString())
+        binding.secondName.setText(result?.data?.lastName.toString())
+        binding.etAddress.setText(result?.data?.address.toString())
+        binding.etCity.setText(result?.data?.city.toString())
+        binding.etBillingAddress.setText(result?.data?.billingAddress.toString())
+        binding.etShippingAddress.setText(result?.data?.shippingAddress.toString())
+
     }
 
 

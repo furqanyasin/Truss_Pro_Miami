@@ -34,8 +34,7 @@ public class CartFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         fragmentCardBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart, container, false);
         setListeners();
